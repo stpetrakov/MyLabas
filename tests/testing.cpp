@@ -38,7 +38,6 @@ void record_results (const double ans, const char* function_name) {
 }
 
 void test_sorting (const char* test_dir, void (*sort_function)(int* , int), const char* function_name, const char* output_dir, int from, int to, int step) {
-
     clock_t start, end;
     int test_index = 0;
     for (int size = from; size <= to; size += step) {
@@ -72,8 +71,8 @@ void test_sorting (const char* test_dir, void (*sort_function)(int* , int), cons
 
             free (array);
             free (expected_result);
-            record_results (ans, function_name);
         }
+        record_results (ans, function_name);
         test_index++;
         printf ("%d\n", test_index);
 
@@ -123,6 +122,7 @@ void test_heap(const char* test_dir, const char* function_name, const char* outp
             char new_function_name[100];
             sprintf (new_function_name, "%s_for_%d", function_name, q);
             record_results (ans, new_function_name);
+            printf("%d\n", test_index);
         }
     }
 }

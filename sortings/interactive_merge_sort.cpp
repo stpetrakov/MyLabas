@@ -3,7 +3,8 @@
 void interactive_merge(int* a, int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
-    int L[n1], R[n2];
+    int* L = (int*) calloc(n1, sizeof(int)); 
+    int* R = (int*) calloc(n2, sizeof(int)); 
 
     for (int i = 0; i < n1; i++)
         L[i] = a[l + i];
@@ -41,6 +42,9 @@ void interactive_merge(int* a, int l, int m, int r) {
         j++;
         k++;
     }
+
+    free (L);
+    free (R);
 }
 
 void my_interactive_merge_sort(int* a, int l, int r) {
