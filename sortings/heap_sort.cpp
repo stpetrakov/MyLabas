@@ -1,172 +1,69 @@
 #include "all_sortings.h"
 
-struct Binary_heap {
-    int* data;
-    int* arr;
-    int size;
-    int capacity;
+struct KaryHeap {
+    int *a; // Массив для хранения элементов кучи
+    int capacity; // Максимальная вместимость кучи
+    int size; // Текущий размер кучи
+    int k; // Количество детей у каждого элемента
 };
 
-
-void swap (int* a, int* b) {
-    int t = *a;
-    *a = *b;
-    *b = t;
+struct KaryHeap *createKaryHeap(int capacity, int k) {
+    struct KaryHeap *karyHeap;
+    karyHeap = (struct KaryHeap *)malloc(sizeof(struct KaryHeap));
+    karyHeap->capacity = capacity;
+    karyHeap->size = 0;
+    karyHeap->a = (int *)malloc(capacity * sizeof(int));
+    karyHeap->k = k;
+    return karyHeap;
 }
 
-struct Binary_heap* init (int capacity) {
-    struct Binary_heap* heap;
-    heap = (struct Binary_heap*) calloc(1, sizeof(struct Binary_heap));
-    assert (heap);
+void heapify(struct KaryHeap *karyHeap, int i) {
+    int largest = i;
+    int child;
 
-    heap->data = (int*) calloc (capacity, sizeof(int));
-    heap->arr = (int*) calloc (capacity, sizeof(int));
-    heap->capacity = capacity;
+    for (int j = 1; j <= karyHeap->k; j++) {
+        child = karyHeap->k * i + j;
+        if (child < karyHeap->size && karyHeap->a[child] > karyHeap->a[largest])
+            largest = child;
+    }
 
-    assert (heap->data);
+    if (largest != i) {
+        int temp = karyHeap->a[i];
+        karyHeap->a[i] = karyHeap->a[largest];
+        karyHeap->a[largest] = temp;
 
-    heap->size = 0;
-
-    return heap;
-}
-
-void sift_up (struct Binary_heap *heap, int i) {
-    assert (heap);
-
-    while (heap->data[(i - 1)/2] > heap->data[i]) {
-        swap (&heap->data[i], &heap->data[(i - 1)/2]);
-        swap (&heap->arr[i], &heap->arr[(i - 1)/2]);
-
-        i = (i - 1)/2;
+        heapify(karyHeap, largest);
     }
 }
 
-void sift_down (struct Binary_heap *heap, int i) {
-    assert (heap);
+void heap_sort(int *a, int n, int k) {
+    struct KaryHeap *karyHeap = createKaryHeap(n, k);
 
-    while (2*i + 1 < heap->size) {
-        int left = 2 * i + 1;
-        int right = 2 * i + 2;
-        int j = left;
-
-        if (right < heap->size && heap->data[right] < heap->data[left]) {
-            j = right;
-        }
-
-        if (heap->data[i] <= heap->data[j]) {
-            break;
-        }
-
-        swap (&heap->data[i], &heap->data[j]);
-        swap (&heap->arr[i], &heap->arr[j]);
-        i = j;
-    }
-}
-
-void insert (struct Binary_heap *heap, int n, int q) {
-    assert (heap);
-    assert (heap->data);
-	assert (heap->arr);
-
-    if (heap->size == heap->capacity) {
-        heap->capacity *= 2;
-        heap->data = (int*) realloc(heap->data, heap->capacity * sizeof(int));
-        heap->arr = (int*) realloc(heap->arr, heap->capacity * sizeof(int));
+    // Заполняем кучу элементами из массива
+    for (int i = 0; i < n; i++) {
+        karyHeap->a[i] = a[i];
+        karyHeap->size++;
     }
 
-    heap->data[heap->size] = n;
-    heap->arr[heap->size] = q;
-    heap->size++;
-
-    sift_up(heap, heap->size - 1);
-
-}
-
-void extract_min (struct Binary_heap *heap) {
-    assert (heap);
-    assert (heap->data);
-    assert (heap->arr);
-
-    heap->size--;
-    heap->data[0] = heap->data[heap->size];
-    heap->arr[0] = heap->arr[heap->size];
-
-    sift_down (heap, 0);
-}
-
-void get_min (struct Binary_heap *heap) {
-    assert (heap);
-    assert (heap->data);
-
-    printf ("%lld\n", heap->data[0]);
-}
-
-void decrease_key (struct Binary_heap *heap, int n, int x) {
-    assert (heap);
-    assert (heap->data);
-    assert (heap->arr);
-
-    for (int i = 0; i < heap->size; i++) {
-        if (heap->arr[i] == n) {
-            heap->data[i] = heap->data[i] - x;
-
-            sift_up (heap, i);
-
-            break;
-
-        }
-
+    for (int i = (n - 1) / k; i >= 0; i--) {
+        heapify(karyHeap, i);
     }
 
-}
+    for (int i = n - 1; i >= 0; i--) {
+        int temp = karyHeap->a[0];
+        karyHeap->a[0] = karyHeap->a[i];
+        karyHeap->a[i] = temp;
 
-void clear (struct Binary_heap *heap) {
-    assert (heap);
-    assert (heap->arr);
-    assert (heap->data);
+        karyHeap->size--;
 
-    free (heap->arr);
-    free (heap->data);
-    free (heap);
-
-}
-
-int main() {
-    struct Binary_heap* heap;
-    heap = init(1);
-    char a[20];
-
-    int n, q = 1;
-    scanf ("%lld", &n);
-
-    while (n) {
-        scanf("%s", a);
-
-        if (strcmp(a, "insert") == 0) {
-            int t;
-            scanf("%lld", &t);
-            insert (heap, t, q);
-        }
-        else if (strcmp(a, "extractMin") == 0)
-        {
-            extract_min (heap);
-        }
-        else if (strcmp(a, "getMin") == 0)
-        {
-            get_min (heap);
-        }
-        else if (strcmp(a, "decreaseKey") == 0)
-        {
-            int t, x;
-            scanf("%lld %lld", &t, &x);
-            decrease_key (heap, t, x);
-        }
-
-        n--;
-        q++;
+        heapify(karyHeap, 0);
     }
-    return 0;
+
+    for (int i = 0; i < n; i++) {
+        a[i] = karyHeap->a[i];
+    }
+
+    free(karyHeap->a);
+    free(karyHeap);
 }
-
-
 

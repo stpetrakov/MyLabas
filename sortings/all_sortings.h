@@ -14,8 +14,10 @@ void selection_sort(int* a, int n);
 
 void shell_sort(int* a, int n);
 
-void heap_sort(int* a, int n);
+void heap_sort(int* a, int n, int k);
 
-void merge_sort(int* a, int n);
+void recursive_merge_sort(int* a, int n);
+
+void interactive_merge_sort(int* a, int n);
 
 #endif // ALL_SORTINGS_H
