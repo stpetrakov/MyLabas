@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Github/Third_Laba/build",
+  "command": "C:/Users/stpet/Downloads/CodeBlocks/MinGW/bin/cc.exe   -g -std=gnu11 -o CMakeFiles/Third_Laba.dir/main.c.obj -c C:/Github/Third_Laba/main.c",
+  "file": "C:/Github/Third_Laba/main.c",
+  "output": "CMakeFiles/Third_Laba.dir/main.c.obj"
+}
+]

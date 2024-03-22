@@ -1,0 +1,3 @@
+C:/Github/Third_Laba/cmake-build-debug/CMakeFiles/Third_Laba.dir
+C:/Github/Third_Laba/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Github/Third_Laba/cmake-build-debug/CMakeFiles/rebuild_cache.dir
