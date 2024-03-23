@@ -27,7 +27,7 @@ void read_array_from_file (const char *filename, int *array, int size) {
 void record_results (const double ans, const char* function_name) {
     FILE *answer;
     char way[200];
-    sprintf (way, "C:/Github/Third_Laba/tests/answers/%s.txt", function_name);
+    sprintf (way, "C:/Github/Third_Laba/Laba_3/tests/answers/%s.txt", function_name);
 
     answer = fopen(way, "a+");
     assert (answer != NULL);
