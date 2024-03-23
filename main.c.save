@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include "tests_dynamic.h"
 #include "tests_list.h"
-#define test_number 1;
-#define number of tests
 
 int main (int argc, const char* argv[])
 {
+    //for 1-3 tests
+    int tests;
+    scanf ("%d", &tests);
+
     double med_dynamic = 0;
     double med_list = 0;
 
-    int i = 0;
-    for (i = 0; i < tests; i++) {
+    for (int i = 0; i < tests; i++) {
         double result = dynamic_test_3();
         printf ("%lg ", result);
         med_dynamic += result;

@@ -6,6 +6,12 @@
 #include <string.h>
 #include <assert.h>
 
+#define coeff 2;
+
+enum result{
+    success = 1,
+};
+
 struct DynamicStack
 {
     void* data;

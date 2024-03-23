@@ -1,7 +1,8 @@
 #include "tests_dynamic.h"
 
+
 double dynamic_test_1() {
-    DynamicStack *st = stack_ctr (1, sizeof(int));
+    struct DynamicStack *st = stack_ctr (1, sizeof(int));
 
     clock_t start_time = clock();
 
@@ -28,7 +29,7 @@ double dynamic_test_1() {
 }
 
 double dynamic_test_2() {
-    DynamicStack* st = stack_ctr(1, sizeof(int));
+    struct DynamicStack* st = stack_ctr(1, sizeof(int));
 
     clock_t start_time = clock();
 
@@ -37,11 +38,11 @@ double dynamic_test_2() {
     }
 
     for (int i = 0; i < 100; i++) {
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             pop (st);
         }
 
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             push (st, &i);
         }
     }
@@ -59,11 +60,11 @@ double dynamic_test_2() {
     }
 
     for (int i = 0; i < 100; i++) {
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             pop (st);
         }
 
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             push (st, &i);
         }
     }
@@ -76,7 +77,7 @@ double dynamic_test_2() {
 }
 
 double dynamic_test_3() {
-    DynamicStack* st = stack_ctr (1, sizeof(int));
+    struct DynamicStack* st = stack_ctr (1, sizeof(int));
     srand (time(NULL));
 
     for (int i = 0; i < 1e6; i++) {
@@ -102,7 +103,7 @@ double dynamic_test_3() {
 }
 
 double dynamic_test_4 (int number) {
-    DynamicStack *st = stack_ctr (1, sizeof(int));
+    struct DynamicStack *st = stack_ctr (1, sizeof(int));
 
     clock_t start_time = clock();
 

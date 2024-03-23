@@ -3,7 +3,7 @@
 struct Node* node_create (void* data, size_t element_size) {
     assert (data != NULL);
 
-    Node* node = (struct Node*) calloc(1, sizeof(struct Node));
+    struct Node* node = (struct Node*) calloc(1, sizeof(struct Node));
     assert (node != NULL);
 
     node->data = calloc (1, element_size);
@@ -39,21 +39,22 @@ int stack_push (struct ListStack* st, void* buffer) {
     assert (buffer != NULL);
 
     struct Node* new_node = node_create (buffer, sizeof(buffer));
-    //printf("%d ", *(int*) new_node->data);
     assert (new_node != NULL);
 
     new_node->Next = st->Last;
     st->Last = new_node;
 
     st->Size++;
-    return 1;
+    return success;
 }
 
 int stack_top (struct ListStack* st, void* buffer) {
     assert (st != NULL);
     assert (st->Last != NULL);
-    memcpy (buffer, st->Last->data, sizeof(st->Last->data));
-    return *(int*)(st->Last)->data;
+    
+    memcpy (buffer, st->Last->data, sizeof (st->Last->data));
+
+    return success;
 }
 
 int stack_pop (struct ListStack* st) {
@@ -63,7 +64,7 @@ int stack_pop (struct ListStack* st) {
     st->Last = st->Last->Next;
     node_del (t);
     st->Size--;
-    return 1;
+    return success;
 }
 
 struct ListStack*  stack_del (struct ListStack* st) {

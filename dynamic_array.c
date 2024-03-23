@@ -4,7 +4,7 @@ struct DynamicStack* stack_ctr (size_t size, size_t element_size) {
     assert (size != 0);
     assert (element_size != 0);
 
-    DynamicStack* st = (struct DynamicStack*) calloc(1, sizeof(struct DynamicStack));
+    struct DynamicStack* st = (struct DynamicStack*) calloc(1, sizeof(struct DynamicStack));
     assert (st != NULL);
 
     st->data = (void*) calloc(size, sizeof(element_size));
@@ -24,13 +24,15 @@ int push (struct DynamicStack* st, void* buffer) {
     assert (st->data != NULL);
 
     if (st->Capacity == st->Size) {
-        st->Capacity *= 2;
+        st->Capacity *= coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
+
+        assert (st->data != NULL);
     }
 
     memcpy ((char*) st->data + st->Size * st->ElemSize, buffer, st->ElemSize);
     st->Size++;
-    return 1;
+    return success;
 }
 
 int top (struct DynamicStack* st, void* buffer) {
@@ -40,7 +42,7 @@ int top (struct DynamicStack* st, void* buffer) {
     assert (st->data != NULL);
 
     memcpy (buffer, (char*) st->data + (st->Size-1) * st->ElemSize, st->ElemSize);
-    return (*(int*) (st->data + (st->Size - 1) * st->ElemSize));
+    return (success);
 }
 
 int pop (struct DynamicStack* st) {
@@ -53,7 +55,15 @@ int pop (struct DynamicStack* st) {
         return 0;
 
     st->Size--;
-    return 1;
+
+    if (st->Capacity / coeff >= st->Size) {
+        st->Capacity /= coeff;
+        st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
+
+        assert (st->data != NULL);
+    }
+
+    return success;
 }
 
 struct DynamicStack* stack_dtr (struct DynamicStack* st) {
