@@ -3,8 +3,9 @@ project(Second_Laba C)
 
 set(CMAKE_C_STANDARD 11)
 
+add_compile_options(-std=c11)
 add_executable(Second_Laba main.c
-        dynamic_array.h
         list_stack.c
-        tests_dinamic.h
-        tests_dinamic.c)
+        tests_dynamic.c
+        dynamic_array.c
+        tests_list.c)
