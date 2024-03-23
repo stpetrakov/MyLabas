@@ -1,7 +1,7 @@
 #include "tests_list.h"
 
 double list_test_1() {
-    ListStack *st = stack_create();
+    struct ListStack *st = stack_create();
 
     clock_t start_time = clock();
 
@@ -28,7 +28,7 @@ double list_test_1() {
 }
 
 double list_test_2() {
-    ListStack *st = stack_create();
+    struct ListStack *st = stack_create();
 
     clock_t start_time = clock();
 
@@ -37,11 +37,11 @@ double list_test_2() {
     }
 
     for (int i = 0; i < 100; i++) {
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             stack_pop (st);
         }
 
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             stack_push (st, &i);
         }
     }
@@ -59,11 +59,11 @@ double list_test_2() {
     }
 
     for (int i = 0; i < 100; i++) {
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             stack_pop (st);
         }
 
-        for (int j = 0; i < 10000; i++) {
+        for (int j = 0; j < 10000; j++) {
             stack_push (st, &i);
         }
     }
@@ -76,7 +76,7 @@ double list_test_2() {
 }
 
 double list_test_3() {
-    ListStack *st = stack_create();
+    struct ListStack *st = stack_create();
 
     srand (time(NULL));
 
@@ -104,7 +104,7 @@ double list_test_3() {
 }
 
 double list_test_4 (int number) {
-    ListStack *st = stack_create();
+    struct ListStack *st = stack_create();
 
     clock_t start_time = clock();
 

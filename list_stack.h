@@ -6,6 +6,10 @@
 #include <string.h>
 #include <assert.h>
 
+enum result{
+    success = 1,
+};
+
 struct Node {
     void* data;
     struct Node* Next;
