@@ -1,22 +1,24 @@
-#include "dynamic_array.h"
+#include "tests.h"
 
-struct DynamicStack* stack_ctr (size_t size, size_t element_size) {
-    assert (size != 0);
-    assert (element_size != 0);
+#ifdef IS_ARRAY_STACK
+#include "dynamic_stack.h"
 
-    struct DynamicStack* st = (struct DynamicStack*) calloc(1, sizeof(struct DynamicStack));
+struct Stack* stack_create () {
+
+    struct Stack* st = (struct Stack*) calloc(1, sizeof(struct Stack));
     assert (st != NULL);
 
-    st->data = (void*) calloc(size, sizeof(element_size));
+    st->Size = 0;
+    st->ElemSize = sizeof (int);
+    st->Capacity = 1;
+
+    st->data = (void*) calloc(st->Capacity, sizeof(int));
     assert (st->data != NULL);
 
-    st->Capacity = size;
-    st->Size = 0;
-    st->ElemSize = element_size;
     return st;
 }
 
-int push (struct DynamicStack* st, void* buffer) {
+int stack_push (struct Stack* st, void* buffer) {
     assert (buffer != NULL);
     assert (st != NULL);
     assert (st->Capacity != 0);
@@ -35,7 +37,7 @@ int push (struct DynamicStack* st, void* buffer) {
     return success;
 }
 
-int top (struct DynamicStack* st, void* buffer) {
+int stack_top (struct Stack* st, void* buffer) {
     assert (st != NULL);
     assert (st->Capacity != 0);
     assert (st->ElemSize != 0);
@@ -45,7 +47,7 @@ int top (struct DynamicStack* st, void* buffer) {
     return (success);
 }
 
-int pop (struct DynamicStack* st) {
+int stack_pop (struct Stack* st) {
     assert (st != NULL);
     assert (st->Capacity != 0);
     assert (st->ElemSize != 0);
@@ -66,7 +68,7 @@ int pop (struct DynamicStack* st) {
     return success;
 }
 
-struct DynamicStack* stack_dtr (struct DynamicStack* st) {
+struct Stack* stack_del (struct Stack* st) {
     assert (st != NULL);
     assert (st->Capacity != 0);
     assert (st->ElemSize != 0);
@@ -77,4 +79,4 @@ struct DynamicStack* stack_dtr (struct DynamicStack* st) {
     return NULL;
 }
 
-
+#endif

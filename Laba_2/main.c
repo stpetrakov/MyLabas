@@ -1,27 +1,12 @@
 #include <stdio.h>
-#include "tests_dynamic.h"
-#include "tests_list.h"
-#define test_number 1;
-#define number of tests
+#include "tests.h"
+#define test_number 1
+#define number_of_tests 100
+#define IS_ARRAY_STACK
 
 int main (int argc, const char* argv[])
 {
-    double med_dynamic = 0;
-    double med_list = 0;
-
-    int i = 0;
-    for (i = 0; i < tests; i++) {
-        double result = dynamic_test_3();
-        printf ("%lg ", result);
-        med_dynamic += result;
-
-        result = list_test_3();
-        printf ("%lg\n", result);
-        med_list += result;
-    }
-
-    printf ("Average value of dynamic: %lg list: %lg", med_dynamic/(double)tests, med_list/(double)tests);
-
+    tester (number_of_tests, test_number);
     //for 4 test
 
     /*
