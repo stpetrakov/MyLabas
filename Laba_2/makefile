@@ -3,31 +3,33 @@ CFLAGS = -c -Wall -std=c11
 
 all: start
 
-start: main.o dynamic_array.o list_stack.o tests_dynamic.o tests_list.o
-	$(CC) main.o dynamic_array.o list_stack.o tests_dynamic.o tests_list.o -o result.exe
+ifndef IS_ARRAY_STACK
+start: main.o dynamic_stack.o tests.o
+	$(CC) main.o dynamic_stack.o tests.o -o result.exe
 
-main.o: 
-	main.c
+main.o: main.c
 	$(CC) $(CFLAGS) main.c
 
-dynamic_array.o: 
-	dynamic_array.c
-	$(CC) $(CFLAGS) dynamic_array.c
+dynamic_stack.o: dynamic_stack.c
+	$(CC) $(CFLAGS) dynamic_stack.c
 
+tests.o: tests.c
+	$(CC) $(CFLAGS) tests.c
 
-list_stack.o: 
-	list_stack.c
+else
+start: main.o list_stack.o tests.o
+	$(CC) main.o list_stack.o tests.o -o result.exe
+
+main.o: main.c
+	$(CC) $(CFLAGS) main.c
+
+list_stack.o: list_stack.c
 	$(CC) $(CFLAGS) list_stack.c
 
+tests.o: tests.c
+	$(CC) $(CFLAGS) tests.c
 
-tests_dynamic.o: 
-	tests_dynamic.c
-	$(CC) $(CFLAGS) tests_dynamic.c
-
-
-tests_list.o: 
-	tests_list.c
-	$(CC) $(CFLAGS) tests_list.c
+endif
 
 clean:
 	rm -rf *.o start

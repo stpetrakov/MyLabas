@@ -1,28 +1,28 @@
-#ifndef LABA2_LIST_STACK_H
-#define LABA2_LIST_STACK_H
+#ifndef LABA2_DYNAMIC_ARRAY_H
+#define LABA2_DYNAMIC_ARRAY_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
+#define coeff 2
+
 enum result{
     success = 1,
 };
 
-struct Node {
+struct Stack
+{
     void* data;
-    struct Node* Next;
-};
-
-struct Stack {
-    struct Node* Last;
     size_t Size;
+    size_t Capacity;
+    size_t ElemSize;
 };
 
-struct Node* node_create (void * data, size_t element_size);
+struct Stack* stack_create ();
 
-struct Stack* stack_create();
+struct Stack* stack_del (struct Stack* st);
 
 int stack_push (struct Stack* st, void* buffer);
 
@@ -32,4 +32,5 @@ int stack_pop (struct Stack* st);
 
 struct Stack*  stack_del (struct Stack* st);
 
-#endif //LABA2_LIST_STACK_H
+
+#endif //LABA2_DYNAMIC_ARRAY_H

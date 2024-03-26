@@ -1,3 +1,6 @@
+#include "tests.h"
+
+#ifndef IS_ARRAY_STACK
 #include "list_stack.h"
 
 struct Node* node_create (void* data, size_t element_size) {
@@ -23,9 +26,9 @@ void node_del (struct Node* node) {
     free (node);
 }
 
-struct ListStack* stack_create () {
-    struct ListStack* st;
-    st = (struct ListStack *) malloc(sizeof(struct ListStack));
+struct Stack* stack_create () {
+    struct Stack* st;
+    st = (struct Stack *) malloc(sizeof(struct Stack));
 
     assert (st != NULL);
 
@@ -34,7 +37,7 @@ struct ListStack* stack_create () {
     return st;
 }
 
-int stack_push (struct ListStack* st, void* buffer) {
+int stack_push (struct Stack* st, void* buffer) {
     assert (st != NULL);
     assert (buffer != NULL);
 
@@ -48,7 +51,7 @@ int stack_push (struct ListStack* st, void* buffer) {
     return success;
 }
 
-int stack_top (struct ListStack* st, void* buffer) {
+int stack_top (struct Stack* st, void* buffer) {
     assert (st != NULL);
     assert (st->Last != NULL);
     
@@ -57,7 +60,7 @@ int stack_top (struct ListStack* st, void* buffer) {
     return success;
 }
 
-int stack_pop (struct ListStack* st) {
+int stack_pop (struct Stack* st) {
     assert (st != NULL);
 
     struct Node* t = st->Last;
@@ -67,7 +70,7 @@ int stack_pop (struct ListStack* st) {
     return success;
 }
 
-struct ListStack*  stack_del (struct ListStack* st) {
+struct Stack*  stack_del (struct Stack* st) {
     assert (st != NULL);
 
     while (st->Last != NULL) {
@@ -81,3 +84,4 @@ struct ListStack*  stack_del (struct ListStack* st) {
     return NULL;
 }
 
+#endif
