@@ -1,3 +1,9 @@
 {
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "stdlib.h": "c",
+        "list_stack.h": "c",
+        "tests.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,4 +1,4 @@
-#include "tests.h"
+#include "tests.h" 
 
 #ifdef IS_ARRAY_STACK
 #include "dynamic_stack.h"
@@ -58,8 +58,8 @@ int stack_pop (struct Stack* st) {
 
     st->Size--;
 
-    if (st->Capacity / coeff >= st->Size) {
-        st->Capacity /= coeff;
+    if (st->Capacity / (coeff * coeff) >= st->Size) {
+        st->Capacity /= coeff * coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
 
         assert (st->data != NULL);
