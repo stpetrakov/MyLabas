@@ -23,10 +23,12 @@
 
 ***Tест 4:***\
 Динамика: \
-![image](https://github.com/stpetrakov/Stacks-compare/assets/142399633/539c3d49-60bc-408e-ba5d-d858316bb7a5)
+![image](![image](https://github.com/stpetrakov/MyLabas/assets/142399633/0bc7e038-1626-43ea-b373-a2a40e6ac35f)
+
 
 Список: \
-![image](https://github.com/stpetrakov/Stacks-compare/assets/142399633/d50136f7-5e85-4848-a075-e74b89c66aa0)
+![image](![image](https://github.com/stpetrakov/MyLabas/assets/142399633/403d952e-8e13-4a2c-9779-8c775cd1df8a)
+
 
 *Примечание: оба графика были построены с помощью кода на python. Ниже написан псевдокод* 
 ```python
