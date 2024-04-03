@@ -27,8 +27,8 @@ double test_1() {
     }
 
     clock_t end_time = clock();
-    double elapsed_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
-
+    printf ("%f ", (end_time - start_time));
+    double elapsed_time = ((end_time - start_time));
     stack_del(st);
     return elapsed_time;
 }
@@ -125,14 +125,28 @@ double test_4 (int number) {
 }
 
 void tester (int number_of_tests, int test) {
-    double med = 0;
+    if (test != 4) {
     
+    double med = 0;
+
     for (int i = 0; i < number_of_tests; i++) {
-        double result = test_1();
+        if (test == 1)
+            double result = test_1();
+        
+        else if (test == 2)
+
+        else if (test == 3)
+
         printf ("%lg ", result);
         med += result;
     }
 
     printf ("%lg\n", med);
+    }
 
+    else {
+        for (int i = 1000; i <= 1e6; i += 1000) {
+            printf("%lg,\n", list_test_4 (i));
+        }
+   }
 }
