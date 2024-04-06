@@ -1,4 +1,4 @@
-#include "tests.h" 
+#include "C:\Github\Second_Laba\Laba_2\Tests\tests.h" 
 
 #ifdef IS_ARRAY_STACK
 #include "dynamic_stack.h"
@@ -24,7 +24,7 @@ int stack_push (struct Stack* st, void* buffer) {
     assert (st->Capacity != 0);
     assert (st->ElemSize != 0);
     assert (st->data != NULL);
-
+    
     if (st->Capacity == st->Size) {
         st->Capacity *= coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
@@ -42,7 +42,6 @@ int stack_top (struct Stack* st, void* buffer) {
     assert (st->Capacity != 0);
     assert (st->ElemSize != 0);
     assert (st->data != NULL);
-
     memcpy (buffer, (char*) st->data + (st->Size-1) * st->ElemSize, st->ElemSize);
     return (success);
 }
