@@ -1,4 +1,4 @@
-#include "tests.h"
+#include "C:\Github\Second_Laba\Laba_2\Tests\tests.h"
 
 #ifndef IS_ARRAY_STACK
 #include "list_stack.h"

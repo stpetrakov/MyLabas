@@ -1,9 +1,9 @@
 #include "tests.h"
-
+#include <time.h>
 #ifdef IS_ARRAY_STACK
-#include "dynamic_stack.h"
+#include "C:\Github\Second_Laba\Laba_2\Stacks\dynamic_stack.h"
 #else
-#include "list_stack.h"
+#include "C:\Github\Second_Laba\Laba_2\Stacks\list_stack.h"
 #endif
 
 double test_1() {
@@ -27,8 +27,9 @@ double test_1() {
     }
 
     clock_t end_time = clock();
-    printf ("%f ", (end_time - start_time));
-    double elapsed_time = ((end_time - start_time));
+
+    double elapsed_time = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
+
     stack_del(st);
     return elapsed_time;
 }
@@ -124,29 +125,37 @@ double test_4 (int number) {
     return elapsed_time;
 }
 
-void tester (int number_of_tests, int test) {
-    if (test != 4) {
+void tester (int number_of_tests, int test) {  
+    FILE* answer;
+    char way[200];
+    sprintf (way, "C:/Github/Second_Laba/Laba_2/Pictures/%d.txt", test);
+    answer = fopen(way, "a+");
     
-    double med = 0;
+    assert (answer != NULL);
 
-    for (int i = 0; i < number_of_tests; i++) {
-        if (test == 1)
-            double result = test_1();
+    if (test != 4) {
+        double med = 0, result;
         
-        else if (test == 2)
+        for (int i = 0; i < number_of_tests; i++) {
+            if (test == 1)
+                result = test_1();
+            
+            else if (test == 2)
+                result = test_2();
 
-        else if (test == 3)
+            else if (test == 3)
+                result = test_3();
 
-        printf ("%lg ", result);
-        med += result;
-    }
-
-    printf ("%lg\n", med);
+            fprintf (answer, "%lg ", result);
+            med += result;
+        }
     }
 
     else {
         for (int i = 1000; i <= 1e6; i += 1000) {
-            printf("%lg,\n", list_test_4 (i));
+            fprintf(answer, "%lg,\n", test_4 (i));
         }
-   }
+    }
+
+   fclose (answer);
 }
