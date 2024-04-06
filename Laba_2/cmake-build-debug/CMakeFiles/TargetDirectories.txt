@@ -1,3 +1,0 @@
-C:/Github/Second_Laba/cmake-build-debug/CMakeFiles/Second_Laba.dir
-C:/Github/Second_Laba/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Github/Second_Laba/cmake-build-debug/CMakeFiles/rebuild_cache.dir
