@@ -6,8 +6,8 @@
 #include <string.h>
 #include <assert.h>
 
-#define compression_coeff 2
-#define expansion_coeff 4
+#define compression_coeff 4
+#define expansion_coeff 2
 
 enum result{
     success = 1,

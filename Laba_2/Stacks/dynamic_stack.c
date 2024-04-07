@@ -35,7 +35,7 @@ int stack_push (struct Stack* st, void* buffer) {
         return zero_elem_size;
     
     if (st->Capacity == st->Size) {
-        st->Capacity *= compression_coeff;
+        st->Capacity *= expansion_coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
 
         assert (st->data != NULL);
@@ -81,8 +81,8 @@ int stack_pop (struct Stack* st) {
 
     st->Size--;
 
-    if (st->Capacity / expansion_coeff >= st->Size) {
-        st->Capacity /= expansion_coeff;
+    if (st->Capacity / compression_coeff >= st->Size) {
+        st->Capacity /= compression_coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
 
         if (st->data == NULL)
