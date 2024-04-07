@@ -1,10 +1,12 @@
 #include "tests.h"
-#include <time.h>
+
 #ifdef IS_ARRAY_STACK
-#include "C:\Github\Second_Laba\Laba_2\Stacks\dynamic_stack.h"
+#include "..\Stacks\dynamic_stack.h"
+
 #else
-#include "C:\Github\Second_Laba\Laba_2\Stacks\list_stack.h"
+#include "..\Stacks\list_stack.h"
 #endif
+
 
 double test_1() {
     struct Stack *st = stack_create();
@@ -16,7 +18,7 @@ double test_1() {
     }
     int num = big;
 
-    while (num >= not_big) {
+    while (num >= not_so_big) {
         num /= 2;
         for (int i = 0; i < num; i++) {
             stack_pop (st);
@@ -44,18 +46,18 @@ double test_2() {
     }
 
     for (int i = 0; i < small; i++) {
-        for (int j = 0; j < not_small; j++) {
+        for (int j = 0; j < not_so_small; j++) {
             stack_pop (st);
         }
 
-        for (int j = 0; j < not_small; j++) {
+        for (int j = 0; j < not_so_small; j++) {
             stack_push (st, &i);
         }
     }
 
     int num = big;
 
-    while (num >= not_big) {
+    while (num >= not_so_big) {
         num /= 2;
         for (int i = 0; i < num; i++) {
             stack_pop (st);
@@ -66,11 +68,11 @@ double test_2() {
     }
 
     for (int i = 0; i < small; i++) {
-        for (int j = 0; j < not_small; j++) {
+        for (int j = 0; j < not_so_small; j++) {
             stack_pop (st);
         }
 
-        for (int j = 0; j < not_small; j++) {
+        for (int j = 0; j < not_so_small; j++) {
             stack_push (st, &i);
         }
     }
@@ -128,7 +130,7 @@ double test_4 (int number) {
 void tester (int number_of_tests, int test) {  
     FILE* answer;
     char way[200];
-    sprintf (way, "C:/Github/Second_Laba/Laba_2/Pictures/%d.txt", test);
+    sprintf (way, "../Laba_2/Pictures/%d_dyn.txt", test);
     answer = fopen(way, "a+");
     
     assert (answer != NULL);
@@ -146,14 +148,14 @@ void tester (int number_of_tests, int test) {
             else if (test == 3)
                 result = test_3();
 
-            fprintf (answer, "%lg ", result);
+            fprintf (answer, "%g ", result);
             med += result;
         }
     }
 
     else {
         for (int i = 1000; i <= 1e6; i += 1000) {
-            fprintf(answer, "%lg,\n", test_4 (i));
+            fprintf(answer, "%g\n", test_4 (i));
         }
     }
 

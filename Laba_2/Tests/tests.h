@@ -3,9 +3,9 @@
 
 #define IS_ARRAY_STACK
 #define big 1e6
-#define not_big 1e5
+#define not_so_big 1e5
 #define small 1e2
-#define not_small 1e4
+#define not_so_small 1e4
 
 #include <time.h>
 #include <stdlib.h>

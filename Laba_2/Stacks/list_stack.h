@@ -8,6 +8,7 @@
 
 enum result{
     success = 1,
+    memory_allocation_error = 2,
 };
 
 struct Node {

@@ -6,10 +6,14 @@
 #include <string.h>
 #include <assert.h>
 
-#define coeff 2
+#define compression_coeff 2
+#define expansion_coeff 4
 
 enum result{
     success = 1,
+    memory_allocation_error = 2,
+    zero_elem_size = 3,
+    zero_capacity = 4,
 };
 
 struct Stack

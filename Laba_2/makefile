@@ -1,23 +1,30 @@
 CC = gcc
 CFLAGS = -c -Wall -std=c11
+OBJ = main.o tests.o
+EXE = result.exe
 
+ifdef WITHOUT_DYNAMIC_STACK
+    OBJ := $(filter-out Stacks/dynamic_stack.o, $(OBJ))
+else
+    OBJ += Stacks/dynamic_stack.o
+endif
+
+ifdef WITHOUT_LIST_STACK
+    OBJ := $(filter-out Stacks/list_stack.o, $(OBJ))
+else
+    OBJ += Stacks/list_stack.o
+endif
 
 all: start
-start: main.o dynamic_stack.o list_stack.o tests.o
-	$(CC) main.o dynamic_stack.o list_stack.o tests.o -o result.exe
+
+start: $(OBJ)
+	$(CC) $(OBJ) -o $(EXE)
 
 main.o: main.c
 	$(CC) $(CFLAGS) main.c
 
-dynamic_stack.o: Stacks/dynamic_stack.c
-	$(CC) $(CFLAGS) Stacks/dynamic_stack.c
-
-list_stack.o: Stacks/list_stack.c
-	$(CC) $(CFLAGS) Stacks/list_stack.c
-
 tests.o: Tests/tests.c
 	$(CC) $(CFLAGS) Tests/tests.c
 
-
 clean:
-	rm -rf *.o start
+	rm -rf $(OBJ) $(EXE)

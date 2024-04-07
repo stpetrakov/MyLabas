@@ -1,16 +1,18 @@
-#include "C:\Github\Second_Laba\Laba_2\Tests\tests.h"
-
-#ifndef IS_ARRAY_STACK
 #include "list_stack.h"
 
 struct Node* node_create (void* data, size_t element_size) {
-    assert (data != NULL);
+    if (data == NULL) 
+        return memory_allocation_error;
 
     struct Node* node = (struct Node*) calloc(1, sizeof(struct Node));
-    assert (node != NULL);
+
+    if (node == NULL) 
+        return memory_allocation_error;
 
     node->data = calloc (1, element_size);
-    assert(node->data != NULL);
+
+    if (node->data == NULL) 
+        return memory_allocation_error;
 
     memcpy(node->data, data, element_size);
 
@@ -20,7 +22,8 @@ struct Node* node_create (void* data, size_t element_size) {
 }
 
 void node_del (struct Node* node) {
-    assert (node != NULL);
+    if (node == NULL) 
+        return memory_allocation_error;
 
     free (node->data);
     free (node);
@@ -30,7 +33,8 @@ struct Stack* stack_create () {
     struct Stack* st;
     st = (struct Stack *) malloc(sizeof(struct Stack));
 
-    assert (st != NULL);
+    if (st == NULL) 
+        return memory_allocation_error;
 
     st->Last = NULL;
     st->Size = 0;
@@ -38,8 +42,11 @@ struct Stack* stack_create () {
 }
 
 int stack_push (struct Stack* st, void* buffer) {
-    assert (st != NULL);
-    assert (buffer != NULL);
+    if (st == NULL) 
+        return memory_allocation_error;
+
+    if (buffer == NULL) 
+        return memory_allocation_error;
 
     struct Node* new_node = node_create (buffer, sizeof(buffer));
     assert (new_node != NULL);
@@ -52,8 +59,11 @@ int stack_push (struct Stack* st, void* buffer) {
 }
 
 int stack_top (struct Stack* st, void* buffer) {
-    assert (st != NULL);
-    assert (st->Last != NULL);
+    if (st == NULL) 
+        return memory_allocation_error;
+
+    if (st->Last  == NULL) 
+        return memory_allocation_error;
     
     memcpy (buffer, st->Last->data, sizeof (st->Last->data));
 
@@ -61,7 +71,8 @@ int stack_top (struct Stack* st, void* buffer) {
 }
 
 int stack_pop (struct Stack* st) {
-    assert (st != NULL);
+    if (st == NULL) 
+        return memory_allocation_error;
 
     struct Node* t = st->Last;
     st->Last = st->Last->Next;
@@ -71,7 +82,8 @@ int stack_pop (struct Stack* st) {
 }
 
 struct Stack*  stack_del (struct Stack* st) {
-    assert (st != NULL);
+    if (st == NULL) 
+        return memory_allocation_error;
 
     while (st->Last != NULL) {
         struct Node* t = st->Last;
@@ -83,5 +95,3 @@ struct Stack*  stack_del (struct Stack* st) {
 
     return NULL;
 }
-
-#endif

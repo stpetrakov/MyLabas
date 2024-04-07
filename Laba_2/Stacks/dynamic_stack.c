@@ -1,32 +1,41 @@
-#include "C:\Github\Second_Laba\Laba_2\Tests\tests.h" 
-
-#ifdef IS_ARRAY_STACK
 #include "dynamic_stack.h"
 
 struct Stack* stack_create () {
 
     struct Stack* st = (struct Stack*) calloc(1, sizeof(struct Stack));
-    assert (st != NULL);
+    
+    if (st == NULL)
+        return memory_allocation_error;
 
     st->Size = 0;
     st->ElemSize = sizeof (int);
     st->Capacity = 1;
 
     st->data = (void*) calloc(st->Capacity, sizeof(int));
-    assert (st->data != NULL);
+
+
 
     return st;
 }
 
 int stack_push (struct Stack* st, void* buffer) {
-    assert (buffer != NULL);
-    assert (st != NULL);
-    assert (st->Capacity != 0);
-    assert (st->ElemSize != 0);
-    assert (st->data != NULL);
+    if (buffer == NULL) 
+        return memory_allocation_error;
+
+    if (st == NULL)
+        return memory_allocation_error;
+
+    if (st->data == NULL)
+        return memory_allocation_error;
+
+    if (st->Capacity == 0)
+       return zero_capacity;
+
+    if (st->ElemSize == 0)
+        return zero_elem_size;
     
     if (st->Capacity == st->Size) {
-        st->Capacity *= coeff;
+        st->Capacity *= compression_coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
 
         assert (st->data != NULL);
@@ -38,44 +47,65 @@ int stack_push (struct Stack* st, void* buffer) {
 }
 
 int stack_top (struct Stack* st, void* buffer) {
-    assert (st != NULL);
-    assert (st->Capacity != 0);
-    assert (st->ElemSize != 0);
-    assert (st->data != NULL);
+    if (st == NULL)
+        return memory_allocation_error;
+
+    if (st->data == NULL)
+        return memory_allocation_error;
+
+    if (st->Capacity == 0)
+       return zero_capacity;
+
+    if (st->ElemSize == 0)
+        return zero_elem_size;
+
     memcpy (buffer, (char*) st->data + (st->Size-1) * st->ElemSize, st->ElemSize);
     return (success);
 }
 
 int stack_pop (struct Stack* st) {
-    assert (st != NULL);
-    assert (st->Capacity != 0);
-    assert (st->ElemSize != 0);
-    assert (st->data != NULL);
+    if (st == NULL)
+        return memory_allocation_error;
+
+    if (st->data == NULL)
+        return memory_allocation_error;
+
+    if (st->Capacity == 0)
+       return zero_capacity;
+
+    if (st->ElemSize == 0)
+        return zero_elem_size;
 
     if (st->Size == 0)
         return 0;
 
     st->Size--;
 
-    if (st->Capacity / (coeff * coeff) >= st->Size) {
-        st->Capacity /= coeff * coeff;
+    if (st->Capacity / expansion_coeff >= st->Size) {
+        st->Capacity /= expansion_coeff;
         st->data = (void*) realloc (st->data, st->Capacity*st->ElemSize);
 
-        assert (st->data != NULL);
+        if (st->data == NULL)
+            return memory_allocation_error;
     }
 
     return success;
 }
 
 struct Stack* stack_del (struct Stack* st) {
-    assert (st != NULL);
-    assert (st->Capacity != 0);
-    assert (st->ElemSize != 0);
-    assert (st->data != NULL);
+    if (st == NULL)
+        return memory_allocation_error;
+
+    if (st->data == NULL)
+        return memory_allocation_error;
+
+    if (st->Capacity == 0)
+       return zero_capacity;
+
+    if (st->ElemSize == 0)
+        return zero_elem_size;
 
     free (st->data);
     free (st);
     return NULL;
 }
-
-#endif
