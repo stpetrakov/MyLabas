@@ -1,4 +1,4 @@
-#include "tests/tests_generator.h"
+ #include "tests/tests_generator.h"
 #include "tests/testing.h"
 #include "sortings/all_sortings.h"
 using SortFunction = void (*)(int *, int);

@@ -1,3 +1,0 @@
-C:/Github/Third_Laba/build/CMakeFiles/Third_Laba.dir
-C:/Github/Third_Laba/build/CMakeFiles/edit_cache.dir
-C:/Github/Third_Laba/build/CMakeFiles/rebuild_cache.dir

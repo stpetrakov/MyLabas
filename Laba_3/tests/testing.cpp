@@ -1,5 +1,5 @@
 #include "testing.h"
-#include "C:\Github\Third_Laba\sortings\all_sortings.h"
+#include "..\sortings\all_sortings.h"
 
 int compare_arrays (const int *a, const int *b, int size) {
     for (int i = 0; i < size; i++) {
