@@ -1,11 +1,11 @@
- #include "all_sortings.h"
+ #include "quick_sortings.h"
  
 int hoar_partition (int* a, int low, int high) {
     int pivot = a[low + (high - low) / 2];
     int i = low - 1;
     int j = high + 1;
 
-    while (1) {
+    while (true) {
         do {
             i++;
         } while (a[i] < pivot);
@@ -17,22 +17,20 @@ int hoar_partition (int* a, int low, int high) {
         if (i >= j)
             return j;
 
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
+        swap (&a[i], &a[j], int);
     }
 }
 
 
- void my_hoar_sort (int* a, int low, int high) {
+ void Hoar_sort (int* a, int low, int high) {
     if (low < high) {
         int p = hoar_partition (a, low, high);
 
-        my_hoar_sort (a, low, p);
-        my_hoar_sort (a, p + 1, high);
+        Hoar_sort (a, low, p);
+        Hoar_sort (a, p + 1, high);
     }
  }
 
-void hoar_sort (int* a, int n) {
-    my_hoar_sort (a, 0, n-1);
+void hoar_sort (int* a, const size_t n) {
+    Hoar_sort (a, 0, n-1);
 }
