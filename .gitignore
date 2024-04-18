@@ -1,5 +1,6 @@
 *.o
 *.exe
+<<<<<<< HEAD
 *.idea
 *.gitignore
 *big_tests
@@ -8,3 +9,6 @@
 *tests_most_dublicates
 *build
 *cmake-build-debug
+=======
+*.vscode
+>>>>>>> 06920c874e4e8acc4148b9409aff88e7ce615e1a
