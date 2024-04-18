@@ -5,8 +5,8 @@ CXXFLAGS = -c -Wall
 
 all: start
 
-start: main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o interactive_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o
-	$(CXX) main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o interactive_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o -o result.exe
+start: main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o interative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o
+	$(CXX) main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o interative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o -o result.exe
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp
@@ -32,8 +32,8 @@ heap_sort.o: sortings/heap_sort.cpp
 recursive_merge_sort.o: sortings/recursive_merge_sort.cpp
 	$(CXX) $(CXXFLAGS) sortings/recursive_merge_sort.cpp
 
-interactive_merge_sort.o: sortings/interactive_merge_sort.cpp
-	$(CXX) $(CXXFLAGS) sortings/interactive_merge_sort.cpp
+interative_merge_sort.o: sortings/interative_merge_sort.cpp
+	$(CXX) $(CXXFLAGS) sortings/interative_merge_sort.cpp
 	
 lomuto_sort.o: sortings/lomuto_sort.cpp
 	$(CXX) $(CXXFLAGS) sortings/lomuto_sort.cpp
@@ -49,6 +49,7 @@ lsd_sort.o: sortings/lsd_sort.cpp
 
 msd_sort.o: sortings/msd_sort.cpp
 	$(CXX) $(CXXFLAGS) sortings/msd_sort.cpp
+	
 
 clean:
 	rm -rf *.o result.exe

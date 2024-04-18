@@ -1,9 +1,9 @@
-#include "all_sortings.h"
+#include "square_sortings.h"
 
-void insertion_sort(int* a, int n)
+void insertion_sort(int* a, const size_t n)
 {
     int t, j;
-    for (int i = 1; i < n; i++) {
+    for (size_t i = 1; i < n; i++) {
         t = a[i];
         j = i - 1;
 

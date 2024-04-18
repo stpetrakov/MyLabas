@@ -1,10 +1,8 @@
-#include "all_sortings.h"
+#include "quick_sortings.h"
 
-void interactive_merge(int* a, int l, int m, int r) {
+void iterative_merge(int* a, int l, int m, int r, int* L, int* R) {
     int n1 = m - l + 1;
     int n2 = r - m;
-    int* L = (int*) calloc(n1, sizeof(int)); 
-    int* R = (int*) calloc(n2, sizeof(int)); 
 
     for (int i = 0; i < n1; i++)
         L[i] = a[l + i];
@@ -42,21 +40,27 @@ void interactive_merge(int* a, int l, int m, int r) {
         j++;
         k++;
     }
-
-    free (L);
-    free (R);
 }
 
-void my_interactive_merge_sort(int* a, int l, int r) {
+void Iterative_merge_sort(int* a, int l, int r, int* L, int* R) {
     if (l < r) {
         int m = l + (r - l) / 2;
 
-        my_interactive_merge_sort(a, l, m);
-        my_interactive_merge_sort(a, m + 1, r);
-        interactive_merge(a, l, m, r);
+        Iterative_merge_sort(a, l, m, L, R);
+        Iterative_merge_sort(a, m + 1, r, L, R);
+        iterative_merge(a, l, m, r, L, R);
     }
 }
 
-void interactive_merge_sort(int* a, int n) {
-    my_interactive_merge_sort (a, 0, n - 1);
+void iterative_merge_sort(int* a, const size_t n) {
+    int* L = (int*) calloc(n, sizeof(int));
+    assert (L != NULL);
+
+    int* R = (int*) calloc(n, sizeof(int));
+    assert (R != NULL);
+
+    Iterative_merge_sort (a, 0, n - 1, L, R);
+
+    free (L);
+    free (R);
 }
