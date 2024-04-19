@@ -1,55 +1,60 @@
-#include "quick_sortings.h"
+#include "all_sortings.h"
 
-void recursive_merge(int* array, int left, int middle, int right) {
-    int size_left = middle - left + 1;
-    int size_right = right - middle;
+void recursive_merge(int* a, int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
 
-    int* left_array = (int*) calloc(size_left, sizeof(int)); 
-    assert (left_array != NULL);
+    int* L = (int*) calloc(n1, sizeof(int)); 
+    int* R = (int*) calloc(n2, sizeof(int)); 
 
-    int* right_array = (int*) calloc(size_right, sizeof(int)); 
-    assert (right_array != NULL);
 
-    for (int index_left = 0; index_left < size_left; index_left++)
-        left_array[index_left] = array[left + index_left];
+    for (int i = 0; i < n1; i++)
+        L[i] = a[l + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = a[m + 1 + j];
 
-    for (int index_right = 0; index_right < size_right; index_right++)
-        right_array[index_right] = array[middle + 1 + index_right];
+    int i = 0; 
+    int j = 0;
+    int k = l; 
 
-    int index_left = 0; 
-    int index_right = 0;
-    int index_merged = left; 
-
-    while (index_left < size_left || index_right < size_right) {
-        if (index_left < size_left && (index_right >= size_right || left_array[index_left] <= right_array[index_right])) {
-            array[index_merged] = left_array[index_left];
-            index_left++;
-        } 
-
-        else {
-            array[index_merged] = right_array[index_right];
-            index_right++;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            a[k] = L[i];
+            i++;
+        } else {
+            a[k] = R[j];
+            j++;
         }
-
-        index_merged++;
+        k++;
     }
 
-    free(left_array);
-    free(right_array);
+    while (i < n1) {
+        a[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        a[k] = R[j];
+        j++;
+        k++;
+    }
+
+    free (L);
+    free (R);
 }
 
-
-void Recursive_merge_sort(int* a, int l, int r) {
+void my_recursive_merge_sort(int* a, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
 
-        Recursive_merge_sort(a, l, m);
-        Recursive_merge_sort(a, m + 1, r);
+        my_recursive_merge_sort(a, l, m);
+        my_recursive_merge_sort(a, m + 1, r);
 
         recursive_merge(a, l, m, r);
     }
 }
 
-void recursive_merge_sort(int* a, const size_t n) {
-    Recursive_merge_sort (a, 0, n - 1);
+void recursive_merge_sort(int* a, int n) {
+    my_recursive_merge_sort (a, 0, n - 1);
 }

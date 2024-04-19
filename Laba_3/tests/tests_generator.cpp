@@ -25,6 +25,8 @@ int main(int argc, char *argv[]) {
         array[i] = rand() % (max_value + 1); 
     }
 
+    //printf("%d\n", array_size);
+
     for (int i = 0; i < array_size; i++) {
         printf("%d ", array[i]);
     }

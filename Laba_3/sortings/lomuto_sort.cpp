@@ -1,4 +1,4 @@
- #include "quick_sortings.h"
+ #include "all_sortings.h"
  
 int lomuto_partition (int* a, int low, int high) {
     int pivot = a[low + (high - low) / 2];
@@ -11,24 +11,28 @@ int lomuto_partition (int* a, int low, int high) {
     for (int j = low; j <= high - 1; j++) {
         if (a[j] < pivot) {
             i++;
-            swap (&a[i], &a[j], int);  
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;   
         }
     }
 
-    swap (&a[i + 1], &a[high], int);
+    temp = a[i+1];
+    a[i+1] = a[high];
+    a[high] = temp;
 
     return i + 1;
 }
 
- void Lomuto_sort (int* a, int low, int high) {
+ void my_lomuto_sort (int* a, int low, int high) {
     if (low < high) {
         int p = lomuto_partition (a, low, high);
 
-        Lomuto_sort (a, low, p - 1);
-        Lomuto_sort (a, p + 1, high);
+        my_lomuto_sort (a, low, p - 1);
+        my_lomuto_sort (a, p + 1, high);
     }
  }
 
-void lomuto_sort (int* a, const size_t n) {
-    Lomuto_sort (a, 0, n-1);
+void lomuto_sort (int* a, int n) {
+    my_lomuto_sort (a, 0, n-1);
 }

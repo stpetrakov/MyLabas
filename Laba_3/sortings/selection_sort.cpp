@@ -1,17 +1,19 @@
-#include "square_sortings.h"
+#include "all_sortings.h"
 
-void selection_sort(int* a, const size_t n) 
+void selection_sort(int* a, int n) 
 { 
-    size_t minimum; 
-    for (size_t i = 0; i < n-1; i++) { 
-        minimum = i;
+    int mi; 
+    for (int i = 0; i < n-1; i++) { 
+        mi = i;
 
-        for (size_t j = i + 1; j < n; j++) 
-            if (a[j] < a[minimum]) 
-                minimum = j; 
+        for (int j = i + 1; j < n; j++) 
+            if (a[j] < a[mi]) 
+                mi = j; 
 
-        if (minimum != i) {
-            swap (&a[i], &a[minimum], int);
+        if(mi != i) {
+            int t = a[i];
+            a[i] = a[mi];
+            a[mi] = t;
         }
     } 
 } 

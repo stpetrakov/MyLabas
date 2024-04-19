@@ -1,11 +1,13 @@
-#include "square_sortings.h"
+#include "all_sortings.h"
 
-void bubble_sort (int* a, const size_t n)
+void bubble_sort (int* a, int n)
 {
-    for (size_t i = 0; i < n-1; i++) {
-        for (size_t j = i; j < n; j++) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i; j < n; j++) {
             if (a[i] > a[j]) {
-                swap (&a[i], &a[j], int);
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
             }
         }
     }
