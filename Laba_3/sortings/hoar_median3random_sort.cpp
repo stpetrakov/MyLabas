@@ -6,9 +6,9 @@
 int choose_pivot_median3random(int* a , int left, int right) {
     srand(time(NULL));
 
-    int rand1 = left + rand() % (right - left + 1);
-    int rand2 = left + rand() % (right - left + 1);
-    int rand3 = left + rand() % (right - left + 1);
+    int rand1 = left + rand() % (right - left);
+    int rand2 = left + rand() % (right - left);
+    int rand3 = left + rand() % (right - left);
     int median = max(min(a[rand1], a[rand2]), min(max(a[rand1], a[rand2]), a[rand3]));
 
     if (median == a[rand1])

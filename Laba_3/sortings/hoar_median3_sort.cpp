@@ -1,18 +1,18 @@
  #include "quick_sortings.h"
 
-int choose_pivot_median3 (int* arr, int left, int right) {
-    int mid = (left + right) / 2;
+int choose_pivot_median3 (int* a, int left, int right) {
+    int mid = left + (right - left) / 2;
 
-    if (arr[left] > arr[mid])
-        swap(&arr[left], &arr[mid], int);
+    if (a[left] > a[mid])
+        swap(&a[left], &a[mid], int);
 
-    if (arr[left] > arr[right])
-        swap(&arr[left], &arr[right], int);
+    if (a[left] > a[right])
+        swap(&a[left], &a[right], int);
 
-    if (arr[mid] > arr[right])
-        swap (&arr[mid], &arr[right], int);
+    if (a[mid] > a[right])
+        swap (&a[mid], &a[right], int);
 
-    return mid;
+    return a[mid];
 }
  
 int hoar_median3_partition (int* a, int low, int high) {

@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         SORT_FUNCTION(bubble_sort);
         SORT_FUNCTION(hoar_sort);
         SORT_FUNCTION(insertion_sort);
-        SORT_FUNCTION(interative_merge_sort);
+        SORT_FUNCTION(iterative_merge_sort);
         SORT_FUNCTION(lomuto_sort);
         SORT_FUNCTION(lsd_sort);
         SORT_FUNCTION(msd_sort);
@@ -32,10 +32,10 @@ int main(int argc, char *argv[]) {
         SORT_FUNCTION(selection_sort);
         SORT_FUNCTION(shell_sort);
         SORT_FUNCTION(thick_sort);
-        //SORT_FUNCTION(hoar_center_sort);
-        //SORT_FUNCTION(hoar_median3_sort);
-        //SORT_FUNCTION(hoar_median3random_sort);
-        //SORT_FUNCTION(hoar_random_sort);
+        SORT_FUNCTION(hoar_center_sort);
+        SORT_FUNCTION(hoar_median3_sort);
+        SORT_FUNCTION(hoar_median3random_sort);
+        SORT_FUNCTION(hoar_random_sort);
         break;
     }
 

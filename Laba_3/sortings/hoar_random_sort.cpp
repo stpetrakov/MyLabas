@@ -2,7 +2,7 @@
 
 int choose_pivot_random (int* a, int left, int right) {
     srand(time(NULL));
-    return a[left + rand() % (right - left + 1)];
+    return a[left + rand() % (right - left)];
 }
  
 int hoar_random_partition (int* a, int low, int high) {

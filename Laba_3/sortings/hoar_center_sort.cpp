@@ -1,14 +1,13 @@
  #include "quick_sortings.h"
 
  int choose_pivot_center (int* a, int left, int right) {
-    return a[right + (left - right) / 2];
+    return a[left + (right - left) / 2];
 }
  
 int hoar_center_partition (int* a, int low, int high) {
     int pivot = choose_pivot_center (a, low, high);
     int i = low - 1;
     int j = high + 1;
-
     while (true) {
         do {
             i++;
