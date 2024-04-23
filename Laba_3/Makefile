@@ -5,8 +5,8 @@ CXXFLAGS = -c -Wall
 
 all: start
 
-start: main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o iterative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o hoar_center_sort.o hoar_median3_sort.o hoar_median3random_sort.o hoar_random_sort.o
-	$(CXX) main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o iterative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o hoar_center_sort.o hoar_median3_sort.o hoar_median3random_sort.o hoar_random_sort.o -o result.exe
+start: main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o iterative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o hoar_center_sort.o hoar_median3_sort.o hoar_median3random_sort.o hoar_random_sort.o optimized_insertion2_sort.o optimized_insertion_sort.o
+	$(CXX) main.o testing.o shell_sort.o bubble_sort.o insertion_sort.o selection_sort.o heap_sort.o recursive_merge_sort.o iterative_merge_sort.o lomuto_sort.o hoar_sort.o thick_sort.o lsd_sort.o msd_sort.o hoar_center_sort.o hoar_median3_sort.o hoar_median3random_sort.o hoar_random_sort.o optimized_insertion2_sort.o optimized_insertion_sort.o -o result.exe
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) main.cpp
@@ -61,7 +61,12 @@ hoar_median3random_sort.o: sortings/hoar_median3random_sort.cpp
 
 hoar_random_sort.o: sortings/hoar_random_sort.cpp
 	$(CXX) $(CXXFLAGS) sortings/hoar_random_sort.cpp
-	
+
+optimized_insertion2_sort.o: sortings/optimized_insertion2_sort.cpp
+	$(CXX) $(CXXFLAGS) sortings/optimized_insertion2_sort.cpp	
+
+optimized_insertion_sort.o: sortings/optimized_insertion_sort.cpp
+	$(CXX) $(CXXFLAGS) sortings/optimized_insertion_sort.cpp	
 
 clean:
 	rm -rf *.o result.exe

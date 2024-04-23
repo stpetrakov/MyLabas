@@ -6,6 +6,7 @@
 int compare_arrays (const int *a, const int *b, int size) {
     for (int i = 0; i < size; i++) {
         if (a[i] != b[i]) {
+            printf ("%d %d", a[i], b[i]);
             return arrays_not_equal; 
         }
     }
@@ -26,7 +27,7 @@ void read_array_from_file (const char *filename, int *array, int size) {
 void record_results (const double ans, const char* function_name) {
     FILE *answer;
     char way[_MAX_FNAME];
-    sprintf (way, "C://Github/Third_Laba/Laba_3/tests/answers/%s.txt", function_name);
+    sprintf (way, "C://Github/Third_Laba/Laba_3/tests/answers/%s_middle.txt", function_name);
 
     answer = fopen(way, "a+");
     assert (answer != NULL);

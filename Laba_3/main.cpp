@@ -36,12 +36,14 @@ int main(int argc, char *argv[]) {
         SORT_FUNCTION(hoar_median3_sort);
         SORT_FUNCTION(hoar_median3random_sort);
         SORT_FUNCTION(hoar_random_sort);
+        SORT_FUNCTION(optimized_insertion_sort);
+        SORT_FUNCTION(optimized_insertion2_sort);
         break;
     }
 
-    int FROM = 10000;
-    int TO = 1000000;
-    int STEP = 10000;
+    int FROM = 100;
+    int TO = 10000;
+    int STEP = 100;
 
     if (strcmp (test_dir, "tests/small_tests") == 0) {
         FROM = 50;

@@ -40,5 +40,9 @@ void selection_sort(int *a, const size_t n);
  */
 void shell_sort(int *a, const size_t n);
 
+void optimized_bubble_sort(int* a, const size_t n);
+void optimized_insertion2_sort(int* a, const size_t n);
+void optimized_insertion_sort(int* a, const size_t n);
+
 
 #endif // SQUARE_SORTINGS_H
