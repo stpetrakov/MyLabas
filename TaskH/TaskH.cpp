@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <malloc.h>
+#include <assert.h>
 
 void quick_sort (int *a, int n) {
+    assert (a != NULL);
+
     int x = 0;
     int y = n - 1;
     int med = a[n/2];
@@ -46,6 +49,8 @@ int main () {
 
     for (int i = 0; i < n; i++)
         printf ("%d ", a[i]);
+
+    free (a);
 
     return 0;
 }
