@@ -84,7 +84,7 @@ void insert (struct Binary_heap *heap, T n, T q) {
     heap->arr[heap->size] = q;
     heap->size++;
 
-    sift_up(heap, heap->size - 1);
+    sift_up (heap, heap->size - 1);
 
 }
 
@@ -100,11 +100,11 @@ void extract_min (struct Binary_heap *heap) {
     sift_down (heap, 0);
 }
 
-void get_min (struct Binary_heap *heap) {
+int get_min (struct Binary_heap *heap) {
     assert (heap);
     assert (heap->data);
 
-    printf ("%lld\n", heap->data[0]);
+    return (heap->data[0]);
 }
 
 void decrease_key (struct Binary_heap *heap, T n, T x) {
@@ -145,7 +145,7 @@ int main() {
     T n, q = 1;
     scanf ("%lld", &n);
 
-    while (n) {
+    while (n > 0) {
         scanf("%s", a);
 
         if (strcmp(a, "insert") == 0) {
@@ -159,7 +159,7 @@ int main() {
         }
         else if (strcmp(a, "getMin") == 0)
         {
-            get_min (heap);
+            printf ("%lld\n", get_min (heap));
         }
         else if (strcmp(a, "decreaseKey") == 0)
         {
