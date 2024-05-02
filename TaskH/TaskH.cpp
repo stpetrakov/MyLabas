@@ -36,8 +36,10 @@ void quick_sort (int *a, int n) {
 int main () {
     int n;
     scanf("%d", &n);
+    
     int *a;
     a = (int*) malloc(n*sizeof(int));
+    assert(a != NULL);
 
     for (int i = 0; i < n; i++) {
         int x;
