@@ -8,8 +8,8 @@
 #define expansion_coeff 2
 
 enum result{
-    success = 1,
-    error = INT_MIN
+    SUCCESS = 1,
+    ERROR = NULL
 };
 
 struct Stack {
@@ -38,19 +38,19 @@ struct Stack* stack_create () {
 
 int stack_push (struct Stack* st, void* buffer) {
     if (buffer == NULL) 
-        return error;
+        return ERROR;
 
     if (st == NULL)
-        return error;
+        return ERROR;
 
     if (st->data == NULL)
-        return error;
+        return ERROR;
 
     if (st->Capacity == 0)
-       return error;
+       return ERROR;
 
     if (st->ElemSize == 0)
-        return error;
+        return ERROR;
     
     if (st->Capacity == st->Size) {
         st->Capacity *= expansion_coeff;
@@ -62,42 +62,42 @@ int stack_push (struct Stack* st, void* buffer) {
     memcpy ((char*) st->data + st->Size * st->ElemSize, buffer, st->ElemSize);
     st->Size++;
 
-    return success;
+    return SUCCESS;
 }
 
 int stack_top (struct Stack* st, void* buffer) {
     if (st == NULL)
-        return error;
+        return ERROR;
 
     if (st->data == NULL)
-        return error;
+        return ERROR;
 
     if (st->Capacity == 0)
-       return error;
+       return ERROR;
 
     if (st->ElemSize == 0)
-        return error;
+        return ERROR;
 
     memcpy (buffer, (char*) st->data + (st->Size-1) * st->ElemSize, st->ElemSize);
 
-    return (success);
+    return (SUCCESS);
 }
 
 int stack_pop(struct Stack* st) {
     if (st == NULL)
-        return INT_MIN; 
+        return ERROR; 
 
     if (st->data == NULL)
-        return INT_MIN; 
+        return ERROR; 
 
     if (st->Capacity == 0)
-        return INT_MIN; 
+        return ERROR; 
 
     if (st->ElemSize == 0)
-        return INT_MIN; 
+        return ERROR; 
 
     if (st->Size == 0)
-        return INT_MIN;  
+        return ERROR;  
 
     st->Size--;
 
@@ -109,7 +109,7 @@ int stack_pop(struct Stack* st) {
         st->data = realloc(st->data, st->Capacity * st->ElemSize);
 
         if (st->data == NULL)
-            return INT_MIN;  
+            return ERROR;  
     }
 
     return popped_element;  
@@ -132,7 +132,7 @@ int stack_clear (struct Stack* st) {
     assert (st != NULL);
 
     st->Size = 0;
-    return success;
+    return SUCCESS;
 }
 
 int main() {
@@ -145,13 +145,13 @@ int main() {
         if (strcmp(command, "push") == 0) {
             int n;
             scanf ("%d", &n);
-            if (stack_push (stack, &n) == success)
+            if (stack_push (stack, &n) == SUCCESS)
                 printf ("ok\n");
         }
 
         else if (strcmp (command, "pop") == 0) {
             int res = stack_pop (stack);
-            if (res == error) 
+            if (res == ERROR) 
                 printf ("error\n");
 
             else
@@ -160,8 +160,8 @@ int main() {
 
         else if (strcmp(command, "back") == 0) {
             int top_element;
-            stack_top (stack, &top_element);
-            if (top_element == error)
+            int res = stack_top (stack, &top_element);
+            if (res == ERROR)
                 printf ("error\n");
 
             else
@@ -173,7 +173,7 @@ int main() {
         }
 
         else if (strcmp(command, "clear") == 0) {
-            if (stack_clear (stack) == success)
+            if (stack_clear (stack) == SUCCESS)
                 printf ("ok\n");
         }
 
