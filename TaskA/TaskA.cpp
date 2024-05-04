@@ -140,7 +140,8 @@ int main() {
     char command[10];
 
     while (1) {
-        scanf ("%s", command);
+        scanf ("%9s", command);
+        assert(strlen(command) <= 9);
 
         if (strcmp(command, "push") == 0) {
             int n;
