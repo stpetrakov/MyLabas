@@ -27,7 +27,7 @@ void read_array_from_file (const char *filename, int *array, int size) {
 void record_results (const double ans, const char* function_name) {
     FILE *answer;
     char way[_MAX_FNAME];
-    sprintf (way, "C://Github/Third_Laba/Laba_3/tests/answers/%s.txt", function_name);
+    sprintf (way, "../tests/answers/%s.txt", function_name);
 
     answer = fopen(way, "a+");
     assert (answer != NULL);
@@ -106,10 +106,7 @@ void test_heap(const char* test_dir, const char* function_name, const char* outp
                 
                 read_array_from_file (output_filename, expected_result, size);
 
-                if (!compare_arrays (array, expected_result, size)) {
-                    fprintf (stderr, "Error: Sorting function failed on test %d\n", size / step);
-                    exit (EXIT_FAILURE);
-                }
+                assert (compare_arrays(array, expected_result, size));
 
                 free (array);
                 free (expected_result);

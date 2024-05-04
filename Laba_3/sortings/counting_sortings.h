@@ -11,7 +11,7 @@
  *
  * @param a - Указатель на массив для сортировки.
  * @param n - Размер массива.
- * @complexity - O(n * k), где k - количество бит в числе.
+ * @complexity - O(n * k), где k - количество байт в числе.
  */
 void lsd_sort(int* a, const size_t n);
 
@@ -20,7 +20,7 @@ void lsd_sort(int* a, const size_t n);
  *
  * @param a - Указатель на массив для сортировки.
  * @param n - Размер массива.
- * @complexity - O(n * k), где k - количество бит в числе.
+ * @complexity - O(n * k), где k - количество байт в числе.
  */
 void msd_sort(int* a, const size_t n);
 

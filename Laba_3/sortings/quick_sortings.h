@@ -99,5 +99,8 @@ void hoar_random_sort(int* a, const size_t n);
  */
 void hoar_median3random_sort(int* a, const size_t n);
 
+//просто партишион
+int hoar_partition (int* a, int low, int high, int pivot);
+
 #endif // QUICK_SORTINGS_H
 

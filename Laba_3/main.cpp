@@ -1,5 +1,4 @@
 #include "tests/testing.h"
-#include "tests/tests_generator.h"
 
 #include "sortings/counting_sortings.h"
 #include "sortings/square_sortings.h"
