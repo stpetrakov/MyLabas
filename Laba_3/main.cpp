@@ -1,8 +1,10 @@
-#include "tests/tests_generator.h"
 #include "tests/testing.h"
+#include "tests/tests_generator.h"
+
+#include "sortings/counting_sortings.h"
 #include "sortings/square_sortings.h"
 #include "sortings/quick_sortings.h"
-#include "sortings/counting_sortings.h"
+
 typedef void (*SortFunction)(int *, size_t);
 
 #define SORT_FUNCTION(name) \
@@ -10,6 +12,14 @@ typedef void (*SortFunction)(int *, size_t);
         sort_function = &name; \
         break; \
     }
+
+const int FROM_BIG = 10000;
+const int TO_BIG = 1000000;
+const int STEP_BIG = 10000;
+
+const int FROM_SMALL = 50;
+const int TO_SMALL = 1000;
+const int STEP_SMALL = 50;
 
 int main(int argc, char *argv[]) {
     assert (argc != 3);
@@ -41,21 +51,19 @@ int main(int argc, char *argv[]) {
         break;
     }
 
-    int FROM = 100;
-    int TO = 10000;
-    int STEP = 100;
+    int FROM = 10000;
+    int TO = 1000000;
+    int STEP = 10000;
 
     if (strcmp (test_dir, "tests/small_tests") == 0) {
-        FROM = 50;
-        TO = 1000;
-        STEP = 50;
+        test_sorting (test_dir, sort_function, function_name, output_dir, FROM_SMALL, TO_SMALL, STEP_SMALL);
     }
 
     if (strcmp (function_name, "heap_sort") == 0)
-        test_heap(test_dir, function_name, output_dir, FROM, TO, STEP);
+        test_heap(test_dir, function_name, output_dir, FROM_BIG, TO_BIG, STEP_BIG);
     
     else {  
-        test_sorting (test_dir, sort_function, function_name, output_dir, FROM, TO, STEP);
+        test_sorting (test_dir, sort_function, function_name, output_dir, FROM_BIG, TO_BIG, STEP_BIG);
     }
     
 

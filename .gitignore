@@ -1,18 +1,12 @@
 *.o
-<<<<<<< HEAD
 *.exe
-<<<<<<< HEAD
 *.idea
 *.gitignore
 *big_tests
 *small_tests
 *very_small_tests
 *tests_most_dublicates
+*middle_tests
 *build
 *cmake-build-debug
-=======
 *.vscode
->>>>>>> 06920c874e4e8acc4148b9409aff88e7ce615e1a
-=======
-*.exe
->>>>>>> parent of 1520dda (Problems Fixed)

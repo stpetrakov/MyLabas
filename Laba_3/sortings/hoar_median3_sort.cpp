@@ -1,16 +1,16 @@
- #include "quick_sortings.h"
-
+#include "quick_sortings.h"
+#include "swap.h"
 int choose_pivot_median3 (int* a, int left, int right) {
     int mid = left + (right - left) / 2;
 
     if (a[left] > a[mid])
-        swap(&a[left], &a[mid], int);
+        swap (a[left], a[mid]);
 
     if (a[left] > a[right])
-        swap(&a[left], &a[right], int);
+        swap (a[left], a[right]);
 
     if (a[mid] > a[right])
-        swap (&a[mid], &a[right], int);
+        swap (a[mid], a[right]);
 
     return a[mid];
 }
@@ -32,7 +32,7 @@ int hoar_median3_partition (int* a, int low, int high) {
         if (i >= j)
             return j;
 
-        swap (&a[i], &a[j], int);
+        swap (a[i], a[j]);
     }
 }
 

@@ -1,4 +1,5 @@
  #include "quick_sortings.h"
+ #include "swap.h"
  
 int thick_partition (int* a, int low, int high) {
     int pivot = a[low + (high - low) / 2]; 
@@ -17,7 +18,7 @@ int thick_partition (int* a, int low, int high) {
         if (i >= j)
             return j;
 
-        swap (&a[i], &a[j], int);
+        swap (a[i], a[j]);
     }
 }
 
@@ -33,5 +34,5 @@ int thick_partition (int* a, int low, int high) {
  }
 
 void thick_sort (int* a, const size_t n) {
-    Thick_sort (a, 0, n-1);
+    Thick_sort (a, 0, n - 1);
 }

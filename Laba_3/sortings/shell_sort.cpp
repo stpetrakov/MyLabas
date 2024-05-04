@@ -1,4 +1,5 @@
 #include "square_sortings.h"
+#include "swap.h"
 
 void shell_sort(int* a, const size_t n) {
     size_t step = 1;

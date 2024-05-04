@@ -1,66 +1,65 @@
 #include "quick_sortings.h"
+#define min(a, b) ((a) < (b) ? (a) : (b))
 
-void iterative_merge(int* a, int l, int m, int r, int* L, int* R) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
 
-    for (int i = 0; i < n1; i++)
-        L[i] = a[l + i];
+void iterative_merge(int* array, int left, int middle, int right, int* left_array, int* right_array) {
+    int left_size = middle - left + 1;
+    int right_size = right - middle;
 
-    for (int j = 0; j < n2; j++)
-        R[j] = a[m + 1 + j];
+    memcpy(left_array, &array[left], left_size * sizeof(int));
+    memcpy(right_array, &array[middle + 1], right_size * sizeof(int));
 
-    int i = 0;
-    int j = 0;
-    int k = l;
+    int left_index = 0;
+    int right_index = 0;
+    int merge_index = left;
 
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            a[k] = L[i];
-            i++;
-
-        } 
-
-        else {
-            a[k] = R[j];
-            j++;
+    while (left_index < left_size && right_index < right_size) {
+        if (left_array[left_index] <= right_array[right_index]) {
+            array[merge_index] = left_array[left_index];
+            left_index++;
+        } else {
+            array[merge_index] = right_array[right_index];
+            right_index++;
         }
-
-        k++;
+        merge_index++;
     }
 
-    while (i < n1) {
-        a[k] = L[i];
-        i++;
-        k++;
+    while (left_index < left_size) {
+        array[merge_index] = left_array[left_index];
+        left_index++;
+        merge_index++;
     }
 
-    while (j < n2) {
-        a[k] = R[j];
-        j++;
-        k++;
-    }
-}
-
-void Iterative_merge_sort(int* a, int l, int r, int* L, int* R) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-
-        Iterative_merge_sort(a, l, m, L, R);
-        Iterative_merge_sort(a, m + 1, r, L, R);
-        iterative_merge(a, l, m, r, L, R);
+    while (right_index < right_size) {
+        array[merge_index] = right_array[right_index];
+        right_index++;
+        merge_index++;
     }
 }
 
-void iterative_merge_sort(int* a, const size_t n) {
-    int* L = (int*) calloc(n, sizeof(int));
-    assert (L != NULL);
 
-    int* R = (int*) calloc(n, sizeof(int));
-    assert (R != NULL);
+void iterative_merge_sort(int* array, const size_t n) {
+    int* temp_array = (int*)malloc(n * sizeof(int));
+    assert(temp_array != NULL);
 
-    Iterative_merge_sort (a, 0, n - 1, L, R);
+    for (size_t curr_size = 1; curr_size <= n - 1; curr_size = 2 * curr_size) {
+        for (size_t left_start = 0; left_start < n - 1; left_start += 2 * curr_size) {
+            size_t middle = min (left_start + curr_size - 1, n - 1);
+            size_t right_end = min (left_start + 2 * curr_size - 1, n - 1);
 
-    free (L);
-    free (R);
+            int* left_temp_array = (int*) malloc((middle - left_start + 1) * sizeof(int));
+            int* right_temp_array = (int*) malloc((right_end - middle) * sizeof(int));
+            assert (left_temp_array != NULL && right_temp_array != NULL);
+
+            memcpy (left_temp_array, &array[left_start], (middle - left_start + 1) * sizeof(int));
+            memcpy (right_temp_array, &array[middle + 1], (right_end - middle) * sizeof(int));
+
+            iterative_merge (array, left_start, middle, right_end, left_temp_array, right_temp_array);
+
+            free (left_temp_array);
+            free (right_temp_array);
+        }
+    }
+
+    free(temp_array);
 }

@@ -1,11 +1,8 @@
 #include "square_sortings.h"
 
-int binarySearch1(int* a, int item, int low, int high)
-{
-    int mid;
-    
+int iterative_binary_search (int* a, int item, int low, int high) {
     while (low <= high) {
-        mid = low + (high - low) / 2;
+        int mid = low + (high - low) / 2;
 
         if (item == a[mid])
             return mid + 1;
@@ -19,15 +16,12 @@ int binarySearch1(int* a, int item, int low, int high)
     return low;
 }
 
-void optimized_insertion2_sort(int* a, const size_t n)
-{
-    int i, loc, j, selected;
+void optimized_insertion2_sort(int* a, const size_t n) { 
+    for (size_t i = 1; i < n; ++i) {
+        size_t j = i - 1;
+        int selected = a[i];
  
-    for (i = 1; i < n; ++i) {
-        j = i - 1;
-        selected = a[i];
- 
-        loc = binarySearch1(a, selected, 0, j);
+        int loc = iterative_binary_search (a, selected, 0, j);
  
         while (j >= loc) {
             a[j + 1] = a[j];

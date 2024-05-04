@@ -7,10 +7,10 @@ int compare_arrays (const int *a, const int *b, int size) {
     for (int i = 0; i < size; i++) {
         if (a[i] != b[i]) {
             printf ("%d %d", a[i], b[i]);
-            return arrays_not_equal; 
+            return ARRAYS_NOT_EQUAL; 
         }
     }
-    return arrays_equal; 
+    return ARRAYS_EQUAL; 
 }
 
 void read_array_from_file (const char *filename, int *array, int size) {
@@ -27,7 +27,7 @@ void read_array_from_file (const char *filename, int *array, int size) {
 void record_results (const double ans, const char* function_name) {
     FILE *answer;
     char way[_MAX_FNAME];
-    sprintf (way, "C://Github/Third_Laba/Laba_3/tests/answers/%s_middle.txt", function_name);
+    sprintf (way, "C://Github/Third_Laba/Laba_3/tests/answers/%s.txt", function_name);
 
     answer = fopen(way, "a+");
     assert (answer != NULL);
@@ -41,9 +41,9 @@ void test_sorting (const char* test_dir, void (*sort_function)(int* , size_t), c
     clock_t start, end;
     int test_index = 0;
 
-    for (int size = from; size <= to; size += step) {
+    for (size_t size = from; size <= to; size += step) {
         double ans = 0;
-        for (int i = 1; i <= 5; i++) {
+        for (size_t i = 1; i <= 5; i++) {
             char input_filename[_MAX_PATH];
             sprintf (input_filename, "%s/%d_%d.in", test_dir, size, i);
 
@@ -81,11 +81,11 @@ void test_heap(const char* test_dir, const char* function_name, const char* outp
     clock_t start, end;
     int test_index = 0;
     
-    for (int q = 2; q < 10; q++) {
-        for (int size = from; size <= to; size += step) {
+    for (size_t q = 2; q < 10; q++) {
+        for (size_t size = from; size <= to; size += step) {
             double ans = 0;
             for (int i = 1; i <= 5; i++) {
-                char input_filename[20];
+                char input_filename[_MAX_FNAME];
                 sprintf (input_filename, "%s/%d_%d.in", test_dir, size, i);
 
                 int *array = (int*) malloc(size * sizeof(int));

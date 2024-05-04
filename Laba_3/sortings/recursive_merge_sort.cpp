@@ -10,10 +10,10 @@ void recursive_merge(int* array, int left, int middle, int right) {
     int* right_array = (int*) calloc(size_right, sizeof(int)); 
     assert (right_array != NULL);
 
-    for (int index_left = 0; index_left < size_left; index_left++)
+    for (size_t index_left = 0; index_left < size_left; index_left++)
         left_array[index_left] = array[left + index_left];
 
-    for (int index_right = 0; index_right < size_right; index_right++)
+    for (size_t index_right = 0; index_right < size_right; index_right++)
         right_array[index_right] = array[middle + 1 + index_right];
 
     int index_left = 0; 
@@ -39,7 +39,7 @@ void recursive_merge(int* array, int left, int middle, int right) {
 }
 
 
-void Recursive_merge_sort(int* a, int l, int r) {
+void Recursive_merge_sort(int* a, size_t l, size_t r) {
     if (l < r) {
         int m = l + (r - l) / 2;
 

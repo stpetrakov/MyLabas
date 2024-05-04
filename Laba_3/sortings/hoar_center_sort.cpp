@@ -1,6 +1,7 @@
- #include "quick_sortings.h"
+#include "quick_sortings.h"
+#include "swap.h"
 
- int choose_pivot_center (int* a, int left, int right) {
+int choose_pivot_center (int* a, int left, int right) {
     return a[left + (right - left) / 2];
 }
  
@@ -20,7 +21,7 @@ int hoar_center_partition (int* a, int low, int high) {
         if (i >= j)
             return j;
 
-        swap (&a[i], &a[j], int);
+        swap (a[i], a[j]);
     }
 }
 

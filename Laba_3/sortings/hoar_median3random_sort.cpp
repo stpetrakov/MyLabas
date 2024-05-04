@@ -1,4 +1,5 @@
- #include "quick_sortings.h"
+#include "quick_sortings.h"
+#include "swap.h"
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
@@ -6,19 +7,15 @@
 int choose_pivot_median3random(int* a , int left, int right) {
     srand(time(NULL));
 
-    int rand1 = left + rand() % (right - left);
-    int rand2 = left + rand() % (right - left);
-    int rand3 = left + rand() % (right - left);
+    int size = right - left;
+
+    int rand1 = left + rand() % size;
+    int rand2 = left + rand() % size;
+    int rand3 = left + rand() % size;
+    
     int median = max(min(a[rand1], a[rand2]), min(max(a[rand1], a[rand2]), a[rand3]));
 
-    if (median == a[rand1])
-        return a[rand1];
-
-    else if (median == a[rand2])
-        return a[rand2];
-
-    else
-        return a[rand3];
+    return a[median];
 }
  
 int hoar_median3random_partition (int* a, int low, int high) {
@@ -38,7 +35,7 @@ int hoar_median3random_partition (int* a, int low, int high) {
         if (i >= j)
             return j;
 
-        swap (&a[i], &a[j], int);
+        swap (a[i], a[j]);
     }
 }
 

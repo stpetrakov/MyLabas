@@ -1,8 +1,20 @@
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <assert.h>
 #include <time.h>
+
+void wrire_array (int* a, size_t n) {
+    for (size_t i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+}
+
+void fill_rand_array (int* array, size_t array_size, int max_value) {
+    for (size_t i = 0; i < array_size; i++) {
+        array[i] = rand() % (max_value + 1); 
+    }
+}
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
@@ -10,7 +22,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    int array_size = atoi (argv[1]);
+    size_t array_size = atoi (argv[1]);
     int max_value = atoi (argv[2]);
 
     assert (array_size > 0);
@@ -21,13 +33,8 @@ int main(int argc, char *argv[]) {
     int* array = (int*) malloc(array_size * sizeof(int));
     assert (array != NULL);
 
-    for (int i = 0; i < array_size; i++) {
-        array[i] = rand() % (max_value + 1); 
-    }
-
-    for (int i = 0; i < array_size; i++) {
-        printf("%d ", array[i]);
-    }
+    fill_rand_array (array, array_size, max_value);
+    wrire_array (array, array_size);
 
     free(array);
     return 0;
