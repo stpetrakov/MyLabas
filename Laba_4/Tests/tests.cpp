@@ -13,7 +13,6 @@ void read_array_from_file (const char *filename, int *array, int size) {
 }
 
 double test(int type) {
-    srand(42);
 
     char answer[_MAX_FNAME];
 

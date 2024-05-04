@@ -7,10 +7,10 @@
 #define STEP 100000
 
 int main() {
-    srand(43);
+    srand (42);
 
     for (int k = 1; k <= 10; k++) {
-        char filename[20];
+        char filename[_MAX_FNAME];
         sprintf(filename, "Arrays/%d.txt", k * STEP);
         FILE* file = fopen(filename, "w");
 
