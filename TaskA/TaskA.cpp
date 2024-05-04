@@ -8,8 +8,8 @@
 #define expansion_coeff 2
 
 enum result{
-    SUCCESS = 1,
-    ERROR = NULL
+    SUCCESS,
+    ERROR
 };
 
 struct Stack {
@@ -144,7 +144,7 @@ int main() {
 
         if (strcmp(command, "push") == 0) {
             int n;
-            scanf ("%d", &n);
+            assert (scanf ("%d", &n) == 1);
             if (stack_push (stack, &n) == SUCCESS)
                 printf ("ok\n");
         }
