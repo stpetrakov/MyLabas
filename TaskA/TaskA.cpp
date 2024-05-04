@@ -80,7 +80,7 @@ int stack_top (struct Stack* st, void* buffer) {
 
     memcpy (buffer, (char*) st->data + (st->Size-1) * st->ElemSize, st->ElemSize);
 
-    return (SUCCESS);
+    return SUCCESS;
 }
 
 int stack_pop(struct Stack* st) {
@@ -137,6 +137,8 @@ int stack_clear (struct Stack* st) {
 
 int main() {
     struct Stack *stack = stack_create();
+    assert (stack != NULL);
+
     char command[10];
 
     while (1) {
