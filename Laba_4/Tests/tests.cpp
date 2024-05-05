@@ -6,7 +6,11 @@ void read_array_from_file (const char *filename, int *array, int size) {
     assert (file != NULL);
 
     for (int i = 0; i < size; i++) {
-        assert (fscanf (file, "%d", &array[i]) == 1);
+        if (fscanf(file, "%d", &array[i]) != 1) {
+            fprintf(stderr, "ERROR: reading file\n");
+            
+            exit(EXIT_FAILURE);
+        }
     }
 
     fclose (file);
