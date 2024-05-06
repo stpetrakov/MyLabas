@@ -2,41 +2,45 @@
 #include <malloc.h>
 #include <assert.h>
 
+void swap (int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 void quick_sort (int *a, int n) {
     assert (a != NULL);
 
-    int x = 0;
-    int y = n - 1;
+    int i = 0;
+    int j = n - 1;
     int med = a[n/2];
 
-    while (x <= y) {
-        while (a[x] < med)
-            x++;
+    while (i <= j) {
+        while (a[i] < med)
+            i++;
 
-        while (a[y] > med)
-            y--;
+        while (a[j] > med)
+            j--;
 
-        if (x <= y) {
-            int t = a[x];
-            a[x] = a[y];
-            a[y] = t;
-            x++;
-            y--;
+        if (i <= j) {
+            swap (&a[i], &a[j]);
+            i++;
+            j--;
         }
     }
 
-    if (y > 0)
-        quick_sort (a, y + 1);
+    if (j > 0)
+        quick_sort (a, j + 1);
 
-    if (x < n)
-        quick_sort (a + x, n - x);
+    if (i < n)
+        quick_sort (a + i, n - i);
 
 }
 
 int main () {
     int n;
     scanf("%d", &n);
-    
+
     int *a;
     a = (int*) malloc(n*sizeof(int));
     assert(a != NULL);
