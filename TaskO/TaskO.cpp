@@ -30,6 +30,7 @@ struct Binary_heap* init (T capacity) {
     heap->capacity = capacity;
 
     assert (heap->data);
+    assert (heap->arr);
 
     heap->size = 0;
 
@@ -38,17 +39,21 @@ struct Binary_heap* init (T capacity) {
 
 void sift_up (struct Binary_heap *heap, T i) {
     assert (heap);
+    assert (heap->data);
+    assert (heap->arr);
 
     while (heap->data[(i - 1)/2] > heap->data[i]) {
         swap (&heap->data[i], &heap->data[(i - 1)/2]);
         swap (&heap->arr[i], &heap->arr[(i - 1)/2]);
 
-        i = (i - 1)/2;
+        i = (i - 1) / 2;
     }
 }
 
 void sift_down (struct Binary_heap *heap, T i) {
     assert (heap);
+    assert (heap->data);
+    assert (heap->arr);
 
     while (2*i + 1 < heap->size) {
         T left = 2 * i + 1;
@@ -119,7 +124,6 @@ void decrease_key (struct Binary_heap *heap, T n, T x) {
             sift_up (heap, i);
 
             break;
-
         }
 
     }
@@ -140,17 +144,17 @@ void clear (struct Binary_heap *heap) {
 int main() {
     struct Binary_heap* heap;
     heap = init(1);
-    char a[20];
+    char a[_MAX_FNAME];
 
     T n, q = 1;
-    scanf ("%lld", &n);
+    assert (scanf ("%lld", &n) == 1);
 
     while (n > 0) {
         scanf("%s", a);
 
         if (strcmp(a, "insert") == 0) {
             T t;
-            scanf("%lld", &t);
+            assert (scanf("%lld", &t) == 1);
             insert (heap, t, q);
         }
         else if (strcmp(a, "extractMin") == 0)
@@ -164,7 +168,7 @@ int main() {
         else if (strcmp(a, "decreaseKey") == 0)
         {
             T t, x;
-            scanf("%lld %lld", &t, &x);
+            assert (scanf("%lld %lld", &t, &x) == 2);
             decrease_key (heap, t, x);
         }
 
