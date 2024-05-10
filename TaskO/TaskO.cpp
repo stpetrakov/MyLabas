@@ -144,17 +144,24 @@ void clear (struct Binary_heap *heap) {
 int main() {
     struct Binary_heap* heap;
     heap = init(1);
-    char a[_MAX_FNAME];
+    char a[20];
 
     T n, q = 1;
-    assert (scanf ("%lld", &n) == 1);
+    if (scanf("%lld", &n) != 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;
+    }
 
     while (n > 0) {
-        scanf("%s", a);
+        scanf("%19s", a);
+        assert (strlen(a) <= 19);
 
         if (strcmp(a, "insert") == 0) {
             T t;
-            assert (scanf("%lld", &t) == 1);
+            if (scanf("%lld", &t) != 1) {
+                printf ("ERROR: scanf != 1");
+                return 0;
+            }
             insert (heap, t, q);
         }
         else if (strcmp(a, "extractMin") == 0)
@@ -168,7 +175,10 @@ int main() {
         else if (strcmp(a, "decreaseKey") == 0)
         {
             T t, x;
-            assert (scanf("%lld %lld", &t, &x) == 2);
+            if (scanf("%lld %lld", &t, &x) != 2){
+                printf ("ERROR: scanf != 2");
+                return 0;                
+            }
             decrease_key (heap, t, x);
         }
 
