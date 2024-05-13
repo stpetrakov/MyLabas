@@ -1,6 +1,7 @@
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct Binary_heap {
     int *data_min; //отвечает за минимум
@@ -9,6 +10,10 @@ struct Binary_heap {
     int capacity;
 };
 
+enum result {
+    SUCCESS,
+    ERROR
+};
 
 void swap (int* a, int* b) {
     int t = *a;
@@ -35,6 +40,7 @@ struct Binary_heap* init (int capacity) {
 
 void sift_up_min (struct Binary_heap *heap, int i) {
     assert (heap);
+    assert (heap->data_min);
 
     while (i != 0) {
         if (heap->data_min[(i - 1)/2] > heap->data_min[i]) {
@@ -49,6 +55,7 @@ void sift_up_min (struct Binary_heap *heap, int i) {
 
 void sift_up_max (struct Binary_heap *heap, int i) {
     assert (heap);
+    assert (heap->data_max);
 
     while (i != 0) {
         if (heap->data_max[(i - 1)/2] < heap->data_max[i]) {
@@ -63,6 +70,7 @@ void sift_up_max (struct Binary_heap *heap, int i) {
 
 void sift_down_min (struct Binary_heap *heap, int i) {
     assert (heap);
+    assert (heap->data_min);
 
     while (2*i + 1 < heap->size) {
         int left = 2 * i + 1;
@@ -91,6 +99,7 @@ void sift_down_min (struct Binary_heap *heap, int i) {
 
 void sift_down_max (struct Binary_heap *heap, int i) {
     assert (heap);
+    assert (heap->data_max);
 
     while (2*i + 1 < heap->size) {
         int left = 2 * i + 1;
@@ -117,9 +126,10 @@ void sift_down_max (struct Binary_heap *heap, int i) {
     }
 }
 
-void insert (struct Binary_heap *heap, int n) {
+int insert (struct Binary_heap *heap, int n) {
     assert (heap);
     assert (heap->data_min);
+    assert (heap->data_max);
 
     if (heap->size == heap->capacity) {
         heap->capacity *= 2;
@@ -134,15 +144,16 @@ void insert (struct Binary_heap *heap, int n) {
     sift_up_min(heap, heap->size - 1);
     sift_up_max(heap, heap->size - 1);
 
-    printf("ok\n");
+    return SUCCESS;
 }
 
-void extract_min (struct Binary_heap *heap) {
+int extract_min (struct Binary_heap *heap) {
     assert (heap);
     assert (heap->data_min);
+    assert (heap->data_max);
 
     if (heap->size == 0)
-        printf ("error\n");
+        return ERROR;
 
     else {
         heap->size--;
@@ -159,27 +170,28 @@ void extract_min (struct Binary_heap *heap) {
 
    		sift_down_min (heap, 0);
 
-        printf("%d\n", mi);
+        return mi;
     }
 }
 
-void get_min (struct Binary_heap *heap) {
+int get_min (struct Binary_heap *heap) {
     assert (heap);
     assert (heap->data_min);
 
     if (heap->size == 0)
-        printf ("error\n");
+        return ERROR;
 
     else
-        printf ("%d\n", heap->data_min[0]);
+        return heap->data_min[0];
 }
 
-void extract_max (struct Binary_heap *heap) {
+int extract_max (struct Binary_heap *heap) {
     assert (heap);
+    assert (heap->data_min);
     assert (heap->data_max);
 
     if (heap->size == 0)
-        printf ("error\n");
+        return ERROR;
 
     else {
         heap->size--;
@@ -195,34 +207,34 @@ void extract_max (struct Binary_heap *heap) {
         }
     	sift_down_max(heap, 0);
 
-        printf("%d\n", ma);
+        return ma;
     }
 }
 
-void get_max (struct Binary_heap *heap) {
+int get_max (struct Binary_heap *heap) {
     assert (heap);
     assert (heap->data_max);
 
     if (heap->size == 0)
-        printf ("error\n");
+        return ERROR;
 
     else
-        printf ("%d\n", heap->data_max[0]);
+        return heap->data_max[0];
 }
 
-void size (struct Binary_heap *heap) {
+int size (struct Binary_heap *heap) {
     assert (heap);
 
-    printf ("%d\n", heap->size);
+    return heap->size;
 }
 
-void clear (struct Binary_heap *heap) {
+int clear (struct Binary_heap *heap) {
     assert (heap);
     assert (heap->data_max);
     assert (heap->data_min);
 
     heap->size = 0;
-    printf("ok\n");
+    return SUCCESS;
 
 }
 
@@ -232,39 +244,70 @@ int main() {
     char a[20];
 
     int n;
-    scanf ("%d", &n);
+    if (scanf("%d", &n) != 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;                
+    }
 
     while (n) {
-        scanf("%s", a);
+        scanf("%19s", a);
+        assert (strlen(a) <= 19);
 
-        if (a[0] == 'i') {
+        if (strcmp (a, "insert") == 0) {
             int t;
-            scanf("%d", &t);
-            insert (heap, t);
+
+            if (scanf("%d", &t) != 1) {
+                printf ("ERROR: scanf != 1");
+                return 0;                
+            }
+
+            if (insert (heap, t) == SUCCESS)
+                printf ("ok\n");
         }
-        else if (a[0] == 'e' && a[9] == 'i')
+        else if (strcmp (a, "extract_min") == 0)
         {
-            extract_min (heap);
+            int result = extract_min (heap);
+            if (result == ERROR)
+                printf ("error\n");
+
+            else
+                printf ("%d\n", result);
         }
-        else if (a[0] == 'g' && a[5] == 'i')
+        else if (strcmp (a, "get_min") == 0)
         {
-            get_min (heap);
+            int result = get_min (heap);
+            if (result == ERROR)
+                printf ("error\n");
+
+            else
+                printf ("%d\n", result);
         }
-        else if (a[0] == 'e' && a[9] == 'a')
+        else if (strcmp (a, "extract_max") == 0)
         {
-            extract_max (heap);
+            int result = extract_max (heap);
+            if (result == ERROR)
+                printf ("error\n");
+
+            else
+                printf ("%d\n", result);
         }
-        else if (a[0] == 'g' && a[5] == 'a')
+        else if (strcmp (a, "get_max") == 0)
         {
-            get_max (heap);
+            int result = get_max (heap);
+            if (result == ERROR)
+                printf ("error\n");
+
+            else
+                printf ("%d\n", result);
         }
-        else if (a[0] == 's')
+        else if (strcmp (a, "size") == 0)
         {
-            size (heap);
+            printf ("%d\n", size (heap));
         }
-        else if (a[0] == 'c')
+        else if (strcmp (a, "clear") == 0)
         {
-            clear (heap);
+            if (clear (heap) == SUCCESS)
+                printf ("ok\n");
         }
 
         n--;
