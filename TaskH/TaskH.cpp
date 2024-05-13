@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <assert.h>
+#include <stdlib.h>
 
 void swap (int* a, int* b) {
     int temp = *a;
@@ -13,7 +14,7 @@ void quick_sort (int *a, int n) {
 
     int i = 0;
     int j = n - 1;
-    int med = a[n/2];
+    int med = a[i + rand() % (j - i)];
 
     while (i <= j) {
         while (a[i] < med)
@@ -29,17 +30,21 @@ void quick_sort (int *a, int n) {
         }
     }
 
-    if (j > 0)
-        quick_sort (a, j + 1);
+	if (j > 0)
+    	quick_sort (a, j + 1);
 
-    if (i < n)
-        quick_sort (a + i, n - i);
+	if (i < n - 1)
+    	quick_sort (a + i, n - i);
 
 }
 
 int main () {
     int n;
-    scanf("%d", &n);
+
+    if (scanf("%d", &n) != 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;
+    }
 
     int *a;
     a = (int*) malloc(n*sizeof(int));
@@ -47,7 +52,12 @@ int main () {
 
     for (int i = 0; i < n; i++) {
         int x;
-        scanf("%d", &x);
+
+        if (scanf("%d", &x) != 1) {
+            printf ("ERROR: scanf != 1");
+            return 0;
+        }
+
         a[i] = x;
     }
 
