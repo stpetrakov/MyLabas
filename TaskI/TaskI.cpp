@@ -156,24 +156,41 @@ void deleteTree(struct Node* root) {
 
 int main() {
     int n;
-    assert (scanf("%d", &n) == 1);
+
+    if (scanf("%d", &n) != 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;
+    }
 
     struct Node* root = NULL;
 
     for (int i = 0; i < n; ++i) {
         char call_sign[600], aircraft[600];
-        assert (scanf ("%s %s", call_sign, aircraft) == 2);
+        if (scanf ("%600s %600s", call_sign, aircraft) != 2) {
+            printf ("ERROR: scanf != 2");
+            return 0;
+        }
+        assert(strlen(call_sign) <= 599);
+        assert(strlen(aircraft) <= 599);
 
         root = insert (root, call_sign, aircraft);
         root = insert (root, aircraft, call_sign);
     }
 
     int q;
-    assert (scanf ("%d", &q) == 1);
+    if (scanf("%d", &q) != 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;
+    }
 
     for (int i = 0; i < q; ++i) {
         char call_sign[600];
-        assert (scanf ("%s", call_sign) == 1);
+        if (scanf ("%600s", call_sign) != 1) {
+            printf ("ERROR: scanf != 1");
+            return 0;
+        }
+
+        assert(strlen(call_sign) <= 599);
 
         const char* result = search (root, call_sign);
         printf("%s\n", result);
