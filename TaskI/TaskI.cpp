@@ -3,9 +3,11 @@
 #include <string.h>
 #include <assert.h>
 
+#define LEN 600
+
 struct Node {
-    char call_sign[600]; 
-    char aircraft[600];  
+    char call_sign[LEN]; 
+    char aircraft[LEN];  
     struct Node *left;
     struct Node *right;
 };
@@ -165,8 +167,13 @@ int main() {
     struct Node* root = NULL;
 
     for (int i = 0; i < n; ++i) {
-        char call_sign[600], aircraft[600];
-        if (scanf ("%600s %600s", call_sign, aircraft) != 2) {
+        char* call_sign = (char*) calloc (LEN, sizeof(char));
+        assert (call_sign);
+
+        char* aircraft = (char*) calloc (LEN, sizeof(char));
+        assert (aircraft);
+        
+        if (scanf ("%599s %599s", call_sign, aircraft) != 2) {
             printf ("ERROR: scanf != 2");
             return 0;
         }
@@ -184,8 +191,10 @@ int main() {
     }
 
     for (int i = 0; i < q; ++i) {
-        char call_sign[600];
-        if (scanf ("%600s", call_sign) != 1) {
+        char* call_sign = (char*) calloc (LEN, sizeof(char));
+        assert (call_sign);
+        
+        if (scanf ("%599s", call_sign) != 1) {
             printf ("ERROR: scanf != 1");
             return 0;
         }
