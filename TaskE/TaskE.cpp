@@ -12,6 +12,85 @@ struct Node {
     int height;
 };
 
+struct Node* newNode (int key);
+
+int height(struct Node* node);
+
+struct Node* rightRotate (struct Node* x);
+
+struct Node* leftRotate (struct Node* y);
+
+int getBalance (struct Node* node);
+
+struct Node* insert (struct Node* node, int key);
+
+int max_tree_value (struct Node* root) {
+    if (root->right != NULL) {
+        return max_tree_value (root->right);
+    }
+
+    else
+        return root->key;
+}
+
+int find (struct Node* root, int k) {
+    if (root != NULL) {
+        if (root->left != NULL &&  max_tree_value (root->left) >= k)
+            return find (root->left, k);
+
+        else if (root->right != NULL && root->key < k)
+            return find (root->right, k);
+
+        else {
+            return (root->key);
+        }
+    }
+
+    return -1;
+}
+
+int main() {
+    struct Node* root = NULL;
+
+    int n, temp = 0;
+    if (scanf("%d", &n) == 1) {
+        printf ("ERROR: scanf != 1");
+        return 0;
+    }
+    getchar();
+
+    while (n--) {
+        char q;
+        int x;
+
+        if (scanf("%c %d", &q, &x) != 2){
+            printf ("ERROR: scanf != 2");
+            return 0;
+        }
+
+        getchar();
+
+        if (q == '+') {
+            root = insert(root, (x + temp) % BILLION);
+            temp = 0;
+        } 
+        
+        else {
+            temp = find(root, x);
+
+            if (temp < x) {
+                printf ("%d\n", -1);
+                temp = BILLION - 1;
+            }
+
+            else
+                printf("%d\n", temp);
+        }
+    }
+
+    return 0;
+}
+
 struct Node* newNode (int key) {
     struct Node* node = (struct Node*) malloc(sizeof(struct Node));
     assert (node);
@@ -24,7 +103,7 @@ struct Node* newNode (int key) {
     return node;
 }
 
-int height(struct Node* node) {
+int height (struct Node* node) {
     if (node == NULL)
         return 0;
 
@@ -101,63 +180,4 @@ struct Node* insert (struct Node* node, int key) {
     }
 
     return node;
-}
-
-int max_tree_value (struct Node* root) {
-    if (root->right != NULL) {
-        return max_tree_value (root->right);
-    }
-
-    else
-        return root->key;
-}
-
-int find (struct Node* root, int k) {
-    if (root != NULL) {
-        if (root->left != NULL &&  max_tree_value (root->left) >= k)
-            return find (root->left, k);
-
-        else if (root->right != NULL && root->key < k)
-            return find (root->right, k);
-
-        else {
-            return (root->key);
-        }
-    }
-
-    return -1;
-}
-
-int main() {
-    struct Node* root = NULL;
-
-    int n, temp = 0;
-    assert (scanf("%d", &n) == 1);
-    getchar();
-
-    while (n--) {
-        char q;
-        int x;
-        assert (scanf("%c %d", &q, &x) == 2);
-        getchar();
-
-        if (q == '+') {
-            root = insert(root, (x + temp) % BILLION);
-            temp = 0;
-        } 
-        
-        else {
-            temp = find(root, x);
-
-            if (temp < x) {
-                printf("%d\n", -1);
-                temp = BILLION - 1;
-            }
-
-            else
-                printf("%d\n", temp);
-        }
-    }
-
-    return 0;
 }
