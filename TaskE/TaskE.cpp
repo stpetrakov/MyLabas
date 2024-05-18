@@ -5,6 +5,7 @@
 #define max(a, b) ((a > b) ? a : b)
 #define BILLION 1000000000
 
+/// Structure representing a node in the AVL tree.
 struct Node {
     int key;
     struct Node *left;
@@ -12,30 +13,17 @@ struct Node {
     int height;
 };
 
-struct Node* newNode (int key);
 
-int height(struct Node* node);
-
-struct Node* rightRotate (struct Node* x);
-
-struct Node* leftRotate (struct Node* y);
-
-int getBalance (struct Node* node);
-
-struct Node* insert (struct Node* node, int key);
-
-int max_tree_value (struct Node* root) {
-    if (root->right != NULL) {
-        return max_tree_value (root->right);
-    }
-
-    else
-        return root->key;
-}
-
+/**
+ * @brief Finds the largest key in the AVL tree that is less than or equal to k.
+ *
+ * @param root The root of the AVL tree.
+ * @param k The key to find the predecessor for.
+ * @return The largest key less than or equal to k, or -1 if no such key exists.
+ */
 int find (struct Node* root, int k) {
     if (root != NULL) {
-        if (root->left != NULL &&  max_tree_value (root->left) >= k)
+        if (root->left != NULL &&  root->left->key >= k)
             return find (root->left, k);
 
         else if (root->right != NULL && root->key < k)
