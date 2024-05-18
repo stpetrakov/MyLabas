@@ -83,65 +83,6 @@ int size(struct Node* node) {
 }
 
 /**
- * @brief Updates the size of a given node based on its children.
- *
- * @param node The node whose size needs to be updated.
- */
-void updateSize(struct Node* node) {
-    if (node) {
-        node->size = size(node->left) + size(node->right) + 1;
-    }
-}
-
-/**
- * @brief Merges two subtrees into one while maintaining heap property.
- *
- * @param left The root of the left subtree.
- * @param right The root of the right subtree.
- * @return The root of the merged subtree.
- */
-struct Node* merge(struct Node* left, struct Node* right) {
-    if (!left || !right) {
-        return left ? left : right;
-    }
-
-    if (left->priority > right->priority) {
-        left->right = merge(left->right, right);
-        updateSize(left);
-        return left;
-    } else {
-        right->left = merge(left, right->left);
-        updateSize(right);
-        return right;
-    }
-}
-
-/**
- * @brief Splits a subtree into two subtrees based on a key.
- *
- * @param node The root of the subtree to be split.
- * @param key The key to split the subtree at.
- * @param left A pointer to the root of the left subtree.
- * @param right A pointer to the root of the right subtree.
- */
-void split(struct Node* node, int key, struct Node** left, struct Node** right) {
-    assert(left != NULL);
-    assert(right != NULL);
-
-    if (!node) {
-        *left = *right = NULL;
-    } else if (node->key <= key) {
-        *left = node;
-        split(node->right, key, &((*left)->right), right);
-        updateSize(*left);
-    } else {
-        *right = node;
-        split(node->left, key, left, &((*right)->left));
-        updateSize(*right);
-    }
-}
-
-/**
  * @brief Inserts a key into the treap.
  *
  * @param root The root of the treap.
@@ -285,19 +226,28 @@ void solve() {
 
         switch (code) {
             case INSERT:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 if (!exists(root, value)) {
                     root = insert(root, value);
                 }
                 break;
 
             case EXISTS:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 printf("%s\n", exists(root, value) ? "true" : "false");
                 break;
 
             case NEXT:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 {
                     int next = next_value(root, value);
                     if (next != -INF)
@@ -308,7 +258,10 @@ void solve() {
                 break;
 
             case PREV:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 {
                     int prev = prev_value(root, value);
                     if (prev != -INF) {
@@ -320,12 +273,18 @@ void solve() {
                 break;
 
             case DELETE:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 root = erase(root, value);
                 break;
 
             case KTH:
-                assert(scanf("%d", &value) == 1);
+                if (scanf("%d", &value) != 1) {
+                    printf ("ERROR: scanf != 1");
+                    return;
+                }
                 {
                     int kth = find_kth_order_statistic(root, value);
                     if (kth != -INF) {
@@ -351,4 +310,64 @@ void solve() {
 int main() {
     solve();
     return 0;
+}
+
+
+/**
+ * @brief Updates the size of a given node based on its children.
+ *
+ * @param node The node whose size needs to be updated.
+ */
+void updateSize(struct Node* node) {
+    if (node) {
+        node->size = size(node->left) + size(node->right) + 1;
+    }
+}
+
+/**
+ * @brief Merges two subtrees into one while maintaining heap property.
+ *
+ * @param left The root of the left subtree.
+ * @param right The root of the right subtree.
+ * @return The root of the merged subtree.
+ */
+struct Node* merge(struct Node* left, struct Node* right) {
+    if (!left || !right) {
+        return left ? left : right;
+    }
+
+    if (left->priority > right->priority) {
+        left->right = merge(left->right, right);
+        updateSize(left);
+        return left;
+    } else {
+        right->left = merge(left, right->left);
+        updateSize(right);
+        return right;
+    }
+}
+
+/**
+ * @brief Splits a subtree into two subtrees based on a key.
+ *
+ * @param node The root of the subtree to be split.
+ * @param key The key to split the subtree at.
+ * @param left A pointer to the root of the left subtree.
+ * @param right A pointer to the root of the right subtree.
+ */
+void split(struct Node* node, int key, struct Node** left, struct Node** right) {
+    assert(left != NULL);
+    assert(right != NULL);
+
+    if (!node) {
+        *left = *right = NULL;
+    } else if (node->key <= key) {
+        *left = node;
+        split(node->right, key, &((*left)->right), right);
+        updateSize(*left);
+    } else {
+        *right = node;
+        split(node->left, key, left, &((*right)->left));
+        updateSize(*right);
+    }
 }
